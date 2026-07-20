@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique | Diseño Moderno y Carrusel Infinito</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Google Fonts: Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --dark-grey: #121212;
+            --soft-white: #ffffff;
+            --off-white: #f8f9fa;
+            --star-gold: #fbbc04;
+            --accent-color: #333333;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--soft-white);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* =========================================
+           ESTILOS DE LA NAVBAR
+           ========================================= */
+        .modern-navbar {
+            background-color: transparent;
+            padding: 20px 0;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .modern-navbar .navbar-brand,
+        .modern-navbar .nav-link,
+        .modern-navbar .login-link {
+            color: var(--soft-white) !important;
+            font-weight: 600;
+            transition: color 0.4s ease-in-out;
+        }
+
+        .navbar-brand {
+            line-height: 1.1;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .modern-navbar .nav-link { margin: 0 12px; font-size: 0.95rem; }
+        .modern-navbar .nav-link:hover { opacity: 0.7; }
+
+        .modern-navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 12px 0;
+        }
+
+        .modern-navbar.scrolled .navbar-brand,
+        .modern-navbar.scrolled .nav-link,
+        .modern-navbar.scrolled .login-link {
+            color: var(--dark-grey) !important;
+        }
+
+        .login-link {
+            text-decoration: none;
+            font-size: 1.4rem;
+            transition: transform 0.2s ease;
+        }
+
+        .login-link:hover { transform: translateY(-3px); }
+
+        .navbar-toggler {
+            border: none;
+            color: var(--soft-white);
+            font-size: 1.8rem;
+        }
+
+        .modern-navbar.scrolled .navbar-toggler { color: var(--dark-grey); }
+        .navbar-toggler:focus { box-shadow: none; }
+
+        /* =========================================
+           SECCIÓN HERO
+           ========================================= */
+        .hero-section {
+            height: 100vh;
+            background-color: var(--dark-grey);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--soft-white);
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Pequeño toque visual de fondo */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        /* =========================================
+           COMPONENTE DE RESEÑAS
+           ========================================= */
+        .reviews-badge {
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50px;
+            padding: 12px 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+
+        .reviews-badge:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.06); }
+
+        .reviews-info { display: flex; align-items: center; gap: 10px; }
+        .reviews-stars i { color: var(--star-gold); font-size: 1.3rem; margin: 0 1px; }
+
+        .reviews-text { font-size: 0.95rem; font-weight: 600; letter-spacing: 0.3px; margin-top: 2px; }
+        .reviews-text span { font-weight: 800; }
+
+        .avatars-container { display: flex; align-items: center; justify-content: center; }
+        .avatar-circle {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--dark-grey);
+            object-fit: cover;
+            margin-left: -15px;
+            transition: transform 0.2s ease;
+        }
+        .avatar-circle:hover { transform: translateY(-4px); z-index: 10; }
+        .avatar-circle:first-child { margin-left: 0; }
+        .avatar-count {
+            background-color: var(--soft-white); color: var(--dark-grey);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 800; z-index: 5;
+        }
+
+        /* =========================================
+           GALERÍA DE IMÁGENES
+           ========================================= */
+        .gallery-section { padding-top: 100px; background-color: var(--soft-white); }
+        .section-title { color: var(--dark-grey); font-weight: 800; text-align: center; margin-bottom: 50px; font-size: 2.8rem; }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 280px;
+            gap: 25px;
+            padding: 0 25px;
+        }
+
+        .gallery-item {
+            position: relative; border-radius: 20px; overflow: hidden;
+            background-color: var(--off-white);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06); cursor: pointer;
+        }
+
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .gallery-item:hover img { transform: scale(1.06); }
+
+        .sale-badge {
+            position: absolute; top: 15px; right: 15px;
+            background-color: var(--dark-grey); color: var(--soft-white);
+            width: 50px; height: 50px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; font-weight: 800; z-index: 5;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .item-overlay {
+            position: absolute; inset: 0;
+            background: rgba(18, 18, 18, 0.45);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 15px; opacity: 0; transition: opacity 0.4s ease; z-index: 10;
+        }
+
+        .gallery-item:hover .item-overlay { opacity: 1; }
+
+        .overlay-btn, .overlay-btn-outline {
+            text-decoration: none; display: flex; align-items: center; gap: 8px;
+            font-weight: 700; font-size: 0.95rem; border-radius: 50px;
+            transform: translateY(20px); transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .overlay-btn { background-color: var(--soft-white); color: var(--dark-grey); padding: 12px 28px; border: none; }
+        .overlay-btn-outline { background-color: transparent; color: var(--soft-white); border: 2px solid var(--soft-white); padding: 10px 26px; }
+
+        .gallery-item:hover .overlay-btn, .gallery-item:hover .overlay-btn-outline { transform: translateY(0); }
+        .overlay-btn:hover { background-color: #f0f0f0; transform: scale(1.05) !important; }
+        .overlay-btn-outline:hover { background-color: var(--soft-white); color: var(--dark-grey); }
+
+        .item-large { grid-column: span 2; grid-row: span 2; }
+        .item-wide { grid-column: span 2; grid-row: span 1; }
+        .item-tall { grid-column: span 1; grid-row: span 2; }
+        .item-normal { grid-column: span 1; grid-row: span 1; }
+
+        .hidden-photo { display: none !important; }
+        .toggle-photo { animation: fadeIn 0.6s ease forwards; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-modern {
+            background-color: var(--dark-grey); color: var(--soft-white);
+            border-radius: 50px; padding: 16px 45px;
+            font-size: 1.1rem; font-weight: 800; border: none;
+            transition: all 0.3s ease; margin-top: 60px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .btn-modern:hover { background-color: var(--accent-color); transform: translateY(-4px); box-shadow: 0 15px 35px rgba(0,0,0,0.25); }
+
+        /* =========================================
+           ONDAS DIVISORAS
+           ========================================= */
+        .wave-divider-top { width: 100%; height: 120px; margin-top: 60px; line-height: 0; overflow: hidden; background-color: var(--soft-white); }
+        .wave-divider-top svg { width: 100%; height: 100%; }
+
+        .wave-divider-bottom { width: 100%; height: 120px; line-height: 0; overflow: hidden; background-color: var(--dark-grey); }
+        .wave-divider-bottom svg { width: 100%; height: 100%; }
+
+        /* =========================================
+           SECCIÓN DE BENEFICIOS
+           ========================================= */
+        .benefits-section { background-color: var(--dark-grey); color: var(--soft-white); padding: 30px 0 0 0; }
+        .benefit-item { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px; }
+        .icon-glass {
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08); width: 85px; height: 85px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--soft-white);
+            margin-bottom: 25px; transition: all 0.4s ease; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .benefit-item:hover .icon-glass { transform: translateY(-10px) rotate(5deg); background: rgba(255, 255, 255, 0.08); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); }
+        .benefit-item h3 { font-weight: 800; font-size: 1.3rem; margin-bottom: 12px; letter-spacing: 0.5px; }
+        .benefit-item p { color: rgba(255, 255, 255, 0.6); font-size: 1rem; max-width: 260px; margin: 0 auto; line-height: 1.6; }
+
+        /* =========================================
+           CARRUSEL DE TESTIMONIOS (Infinito)
+           ========================================= */
+        .testimonials-section { padding: 40px 0 100px 0; background-color: var(--soft-white); overflow: hidden; }
+
+        .carousel-container {
+            width: 100%;
+            position: relative;
+            padding: 30px 0;
+            /* Máscara para difuminar los bordes laterales y dar un efecto más limpio */
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 30px;
+            width: max-content;
+            /* Animación infinita */
+            animation: scrollCarousel 40s linear infinite;
+        }
+
+        /* Pausar animación al pasar el ratón */
+        .carousel-track:hover { animation-play-state: paused; }
+
+        @keyframes scrollCarousel {
+            0% { transform: translateX(0); }
+            /* Se desplaza exactamente la mitad del ancho total de la pista (porque duplicaremos los items) */
+            100% { transform: translateX(calc(-50% - 15px)); }
+        }
+
+        .testimonial-card {
+            width: 400px; /* Ancho fijo para las tarjetas */
+            flex-shrink: 0;
+            background-color: var(--soft-white);
+            border: 1px solid #eaeaea;
+            border-radius: 24px;
+            padding: 40px 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+
+        .testimonial-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); border-color: transparent; }
+
+        .testimonial-header { display: flex; align-items: center; gap: 18px; margin-bottom: 25px; }
+        .testimonial-header img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .user-info h4 { margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--dark-grey); }
+        .user-info .stars { color: var(--star-gold); font-size: 1rem; margin-top: 4px; }
+        .testimonial-text { color: #666; font-size: 1rem; line-height: 1.7; font-style: italic; }
+
+        /* =========================================
+           FOOTER MODERNO
+           ========================================= */
+        .modern-footer { background-color: var(--dark-grey); color: var(--soft-white); padding: 90px 0 30px 0; }
+        .footer-brand { font-size: 2.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; display: inline-block; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; color: var(--soft-white); }
+        .footer-text { color: rgba(255, 255, 255, 0.6); font-size: 1rem; margin-bottom: 30px; max-width: 320px; line-height: 1.6; }
+
+        .footer-links h5 { font-weight: 800; margin-bottom: 30px; font-size: 1.2rem; letter-spacing: 0.5px; }
+        .footer-links ul { list-style: none; padding: 0; margin: 0; }
+        .footer-links ul li { margin-bottom: 18px; }
+        .footer-links ul li a { color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: all 0.3s ease; display: inline-block; font-size: 0.95rem; }
+        .footer-links ul li a:hover { color: var(--soft-white); transform: translateX(8px); }
+
+        .social-icons { display: flex; gap: 15px; }
+        .social-icons a {
+            display: flex; align-items: center; justify-content: center; width: 48px; height: 48px;
+            border-radius: 50%; background: rgba(255, 255, 255, 0.05); color: var(--soft-white);
+            font-size: 1.4rem; text-decoration: none; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .social-icons a:hover { background: var(--soft-white); color: var(--dark-grey); transform: translateY(-5px); border-color: var(--soft-white); }
+
+        /* Estilos pulidos del Newsletter Input */
+        .newsletter-form {
+            display: flex;
+            background-color: var(--soft-white);
+            border-radius: 50px;
+            padding: 5px;
+            margin-top: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            color: var(--dark-grey);
+            padding: 12px 20px;
+            font-weight: 600;
+            outline: none;
+            box-shadow: none !important; /* Prevenir estilos de bootstrap focus */
+        }
+
+        .newsletter-form input::placeholder {
+            color: #999;
+            font-weight: 400;
+        }
+
+        .newsletter-form button {
+            background-color: var(--dark-grey);
+            color: var(--soft-white);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 800;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.02);
+        }
+
+        .footer-bottom { margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; color: rgba(255, 255, 255, 0.4); font-size: 0.95rem; }
+
+        /* Ajustes Responsive */
+        @media (max-width: 992px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 768px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 220px; gap: 15px; }
+            .item-large { grid-column: span 2; grid-row: span 2; }
+            .item-wide { grid-column: span 2; grid-row: span 1; }
+            .item-tall { grid-column: span 1; grid-row: span 2; }
+            .benefit-item { margin-bottom: 40px; }
+            .footer-links { margin-top: 50px; }
+            .testimonial-card { width: 320px; padding: 30px 25px; } /* Tarjetas más pequeñas en móvil */
+        }
+        @media (max-width: 576px) {
+            .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 280px; }
+            .item-large, .item-wide, .item-tall, .item-normal { grid-column: span 1; grid-row: span 1; }
+            .hero-section h1 { font-size: 15vw !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top modern-navbar" id="mainNavbar">
+        <div class="container-fluid px-4 px-md-5">
+            <a class="navbar-brand fw-bold" href="#">logo<br>here</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                <i class='bx bx-menu'></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sale</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-4 mt-3 mt-lg-0">
+                    <a href="#" class="login-link"><i class='bx bx-user'></i></a>
+                    <a href="#" class="login-link"><i class="bx bx-cart"></i></a>
+                    <a href="#" class="login-link"><i class='bx bx-heart'></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER / HERO -->
+    <header class="hero-section">
+        <div style="z-index: 2;">
+            <h1 class="display-1 fw-bold" style="font-size: 8vw; letter-spacing: -2px;">MEGA SALE</h1>
+            <p class="fs-4 text-white-50 mt-2">Explora nuestra nueva colección</p>
+        </div>
+        <div class="reviews-badge">
+            <div class="avatars-container">
+                <img src="https://i.pravatar.cc/100?img=32" alt="User" class="avatar-circle">
+                <img src="https://i.pravatar.cc/100?img=12" alt="User" class="avatar-circle">
+                <img src="https://i.pravatar.cc/100?img=5" alt="User" class="avatar-circle">
+                <div class="avatar-circle avatar-count">+499</div>
+            </div>
+            <div class="reviews-info">
+                <div class="reviews-stars">
+                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star-half'></i>
+                </div>
+                <div class="reviews-text">4.8 rating from <span>502</span> reviews</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- GALERÍA DE IMÁGENES -->
+    <section class="gallery-section container-fluid p-0">
+        <div class="container">
+            <h2 class="section-title">New Arrivals</h2>
+
+            <div class="gallery-grid" id="photoGallery">
+                <!-- Mismas imágenes de la galería previa -->
+                <div class="gallery-item item-large">
+                    <div class="sale-badge">-15%</div>
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" alt="Fashion">
+                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir al carrito</a><a href="#" class="overlay-btn-outline"><i class='bx bx-show'></i> Ver más</a></div>
+                </div>
+                <div class="gallery-item item-wide">
+                    <img src="https://images.unsplash.com/photo-1434389678232-06798028ddc3?q=80&w=800&auto=format&fit=crop" alt="Fashion">
+                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir al carrito</a></div>
+                </div>
+                <div class="gallery-item item-normal">
+                    <div class="sale-badge">-30%</div>
+                    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=400&auto=format&fit=crop" alt="Fashion">
+                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a></div>
+                </div>
+                <div class="gallery-item item-tall">
+                    <img src="https://images.unsplash.com/photo-1550614000-4b95d4ebfa49?q=80&w=400&auto=format&fit=crop" alt="Fashion">
+                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a><a href="#" class="overlay-btn-outline"><i class='bx bx-show'></i> Ver más</a></div>
+                </div>
+                <div class="gallery-item item-normal">
+                    <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=400&auto=format&fit=crop" alt="Fashion">
+                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a></div>
+                </div>
+
+                <!-- Fotos Ocultas -->
+                <div class="gallery-item item-wide toggle-photo hidden-photo">
+                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800&auto=format&fit=crop" alt="Fashion">
+                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir al carrito</a></div>
+                </div>
+                <div class="gallery-item item-tall toggle-photo hidden-photo">
+                    <div class="sale-badge">-10%</div>
+                    <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=400&auto=format&fit=crop" alt="Fashion">
+                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a></div>
+                </div>
+                <div class="gallery-item item-normal toggle-photo hidden-photo">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=400&auto=format&fit=crop" alt="Fashion">
+                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a></div>
+                </div>
+                <div class="gallery-item item-large toggle-photo hidden-photo">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop" alt="Fashion">
+                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir al carrito</a><a href="#" class="overlay-btn-outline"><i class='bx bx-show'></i> Ver más</a></div>
+                </div>
+            </div>
+
+            <!-- Botón Cargar Más -->
+            <div class="text-center">
+                <button class="btn-modern" id="togglePhotosBtn">Cargar más fotos</button>
+            </div>
+        </div>
+
+        <!-- DIVISOR DE ONDA SUPERIOR -->
+        <div class="wave-divider-top">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path d="M0,60 C320,120 420,0 740,60 C1060,120 1200,20 1440,60 L1440,120 L0,120 Z" fill="var(--dark-grey)"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE BENEFICIOS -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 benefit-item">
+                    <div class="icon-glass"><i class='bx bx-package'></i></div>
+                    <h3>Envíos Gratis</h3>
+                    <p>En compras superiores a $50 a cualquier parte del país.</p>
+                </div>
+                <div class="col-md-4 benefit-item">
+                    <div class="icon-glass"><i class='bx bx-support'></i></div>
+                    <h3>Soporte 24/7</h3>
+                    <p>Estamos aquí para ayudarte en cualquier momento del día.</p>
+                </div>
+                <div class="col-md-4 benefit-item">
+                    <div class="icon-glass"><i class='bx bx-shield-alt-2'></i></div>
+                    <h3>Pago Seguro</h3>
+                    <p>Transacciones cifradas y protegidas de extremo a extremo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DIVISOR DE ONDA INFERIOR -->
+        <div class="wave-divider-bottom">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path d="M0,60 C320,120 420,0 740,60 C1060,120 1200,20 1440,60 L1440,120 L0,120 Z" fill="var(--soft-white)"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE TESTIMONIOS (Carrusel Infinito) -->
+    <section class="testimonials-section">
+        <h2 class="section-title mb-2">Lo que dicen nuestros clientes</h2>
+        <div class="carousel-container">
+            <div class="carousel-track">
+
+                <!-- BLOQUE 1 (Original) -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://i.pravatar.cc/150?img=47" alt="Cliente">
+                        <div class="user-info">
+                            <h4>Andrea Gómez</h4>
+                            <div class="stars"><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i></div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"La calidad de las prendas es increíble. Me encantó el diseño de la nueva colección de boutique y el ajuste es simplemente perfecto. Definitivamente se convirtió en mi tienda favorita."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://i.pravatar.cc/150?img=11" alt="Cliente">
+                        <div class="user-info">
+                            <h4>Carlos Ruiz</h4>
+                            <div class="stars"><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star-half'></i></div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"El envío fue rapidísimo y la presentación del empaque es muy elegante. Pedí un par de chaquetas y el estilo minimalista superó mis expectativas. Muy recomendado."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://i.pravatar.cc/150?img=32" alt="Cliente">
+                        <div class="user-info">
+                            <h4>Sofía Mendoza</h4>
+                            <div class="stars"><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i></div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Buscaba piezas originales y modernas para renovar mi guardarropa. Las telas son suaves, las tallas corresponden exactamente a la guía y el servicio al cliente es súper atento."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://i.pravatar.cc/150?img=68" alt="Cliente">
+                        <div class="user-info">
+                            <h4>Martín Cárdenas</h4>
+                            <div class="stars"><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i></div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"La mejor experiencia de compra online que he tenido. La interfaz es limpia, el checkout fue rápido y el abrigo que compré es de un material premium. ¡Un 10/10!"</p>
+                </div>
+
+                <!-- BLOQUE 2 (Duplicado exacto para el loop infinito) -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://i.pravatar.cc/150?img=47" alt="Cliente">
+                        <div class="user-info">
+                            <h4>Andrea Gómez</h4>
+                            <div class="stars"><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i></div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"La calidad de las prendas es increíble. Me encantó el diseño de la nueva colección de boutique y el ajuste es simplemente perfecto. Definitivamente se convirtió en mi tienda favorita."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://i.pravatar.cc/150?img=11" alt="Cliente">
+                        <div class="user-info">
+                            <h4>Carlos Ruiz</h4>
+                            <div class="stars"><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star-half'></i></div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"El envío fue rapidísimo y la presentación del empaque es muy elegante. Pedí un par de chaquetas y el estilo minimalista superó mis expectativas. Muy recomendado."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://i.pravatar.cc/150?img=32" alt="Cliente">
+                        <div class="user-info">
+                            <h4>Sofía Mendoza</h4>
+                            <div class="stars"><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i></div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Buscaba piezas originales y modernas para renovar mi guardarropa. Las telas son suaves, las tallas corresponden exactamente a la guía y el servicio al cliente es súper atento."</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://i.pravatar.cc/150?img=68" alt="Cliente">
+                        <div class="user-info">
+                            <h4>Martín Cárdenas</h4>
+                            <div class="stars"><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i></div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"La mejor experiencia de compra online que he tenido. La interfaz es limpia, el checkout fue rápido y el abrigo que compré es de un material premium. ¡Un 10/10!"</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER MODERNO -->
+    <footer class="modern-footer">
+        <div class="container">
+            <div class="row">
+                <!-- Columna 1: Brand -->
+                <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
+                    <a href="#" class="footer-brand">logo<br>here</a>
+                    <p class="footer-text">Redefiniendo el estilo moderno. Descubre piezas exclusivas diseñadas para destacar tu esencia con la más alta calidad y atención al detalle.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class='bx bxl-instagram'></i></a>
+                        <a href="#"><i class='bx bxl-tiktok'></i></a>
+                        <a href="#"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-pinterest-alt'></i></a>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Links -->
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h5>Tienda</h5>
+                    <ul>
+                        <li><a href="#">Nueva Colección</a></li>
+                        <li><a href="#">Más Vendidos</a></li>
+                        <li><a href="#">Ofertas (Sale)</a></li>
+                        <li><a href="#">Accesorios</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Links -->
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h5>Soporte</h5>
+                    <ul>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Envíos y Devoluciones</a></li>
+                        <li><a href="#">Guía de Tallas</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 4: Newsletter -->
+                <div class="col-lg-4 col-md-6 footer-links">
+                    <h5>Únete al Club</h5>
+                    <p class="footer-text" style="font-size: 0.95rem; margin-bottom: 15px;">Suscríbete y recibe un 10% de descuento en tu primera compra, además de acceso anticipado a nuevas colecciones.</p>
+
+                    <!-- INPUT PULIDO Y ARREGLADO -->
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Tu correo electrónico">
+                        <button type="button">Unirme</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2026 LogoHere Boutique. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Lógica JS -->
+    <script>
+        // Navbar scroll logic
+        const navbar = document.getElementById('mainNavbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Load More Photos Logic
+        const toggleBtn = document.getElementById('togglePhotosBtn');
+        const hiddenPhotos = document.querySelectorAll('.toggle-photo');
+        let isExpanded = false;
+
+        toggleBtn.addEventListener('click', () => {
+            isExpanded = !isExpanded;
+
+            hiddenPhotos.forEach(photo => {
+                if (isExpanded) {
+                    photo.classList.remove('hidden-photo');
+                } else {
+                    photo.classList.add('hidden-photo');
+                }
+            });
+
+            if (isExpanded) {
+                toggleBtn.innerHTML = 'Mostrar menos fotos';
+            } else {
+                toggleBtn.innerHTML = 'Cargar más fotos';
+                document.getElementById('photoGallery').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
