@@ -285,14 +285,12 @@
                 border-color: var(--dark-grey);
                 outline: none;
             }
-            /* Nota: Para un control completo de opciones redondeadas en todos los sistemas operativos,
-           usamos propiedades estándar y un padding limpio */
             .custom-select-picker option {
                 padding: 12px;
                 background-color: var(--soft-white);
                 color: var(--dark-grey);
                 font-weight: 600;
-                border-radius: 15px; /* Soportado en ciertos entornos de renderizado */
+                border-radius: 15px;
             }
 
             /* TARJETAS DE PRODUCTO */
@@ -736,6 +734,24 @@
                             </div>
                         </div>
 
+                        <!-- Filtro de Descuentos -->
+                        <div class="filter-group">
+                            <h6>Ofertas Especiales</h6>
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="discountFilter"
+                                />
+                                <label
+                                    class="form-check-label custom-control-label"
+                                    for="discountFilter"
+                                >
+                                    Ver solo productos en oferta
+                                </label>
+                            </div>
+                        </div>
+
                         <!-- Rango de Precios -->
                         <div class="filter-group">
                             <h6>
@@ -812,6 +828,7 @@
                             data-sizes="M,L"
                             data-color="negro"
                             data-title="chaqueta minimalista"
+                            data-discount="true"
                         >
                             <div class="product-card">
                                 <div class="product-image-wrapper">
@@ -1006,7 +1023,7 @@
                             </div>
                         </div>
 
-                        <!-- PRODUCTO 7 (NUEVO) -->
+                        <!-- PRODUCTO 7 -->
                         <div
                             class="col-md-6 col-lg-4 product-item"
                             data-category="vestidos"
@@ -1039,7 +1056,7 @@
                             </div>
                         </div>
 
-                        <!-- PRODUCTO 8 (NUEVO) -->
+                        <!-- PRODUCTO 8 -->
                         <div
                             class="col-md-6 col-lg-4 product-item"
                             data-category="pantalones"
@@ -1073,7 +1090,7 @@
                             </div>
                         </div>
 
-                        <!-- PRODUCTO 9 (NUEVO) -->
+                        <!-- PRODUCTO 9 -->
                         <div
                             class="col-md-6 col-lg-4 product-item"
                             data-category="accesorios"
@@ -1107,7 +1124,7 @@
                             </div>
                         </div>
 
-                        <!-- PRODUCTO 10 (NUEVO) -->
+                        <!-- PRODUCTO 10 -->
                         <div
                             class="col-md-6 col-lg-4 product-item"
                             data-category="abrigos"
@@ -1139,7 +1156,7 @@
                             </div>
                         </div>
 
-                        <!-- PRODUCTO 11 (NUEVO) -->
+                        <!-- PRODUCTO 11 -->
                         <div
                             class="col-md-6 col-lg-4 product-item"
                             data-category="camisas"
@@ -1171,7 +1188,7 @@
                             </div>
                         </div>
 
-                        <!-- PRODUCTO 12 (NUEVO) -->
+                        <!-- PRODUCTO 12 -->
                         <div
                             class="col-md-6 col-lg-4 product-item"
                             data-category="vestidos"
@@ -1179,6 +1196,7 @@
                             data-sizes="S,M"
                             data-color="beige"
                             data-title="vestido midi bohemio"
+                            data-discount="true"
                         >
                             <div class="product-card">
                                 <div class="product-image-wrapper">
@@ -1302,6 +1320,7 @@
                 const priceValue = document.getElementById("priceValue");
                 const searchBar = document.getElementById("searchBar");
                 const sortSelect = document.getElementById("sortSelect");
+                const discountFilter = document.getElementById("discountFilter");
                 const resetBtn = document.getElementById("resetFilters");
                 const productGrid = document.getElementById("productGrid");
                 const products = Array.from(
@@ -1357,6 +1376,7 @@
                     ).value;
                     const maxPrice = parseInt(priceRange.value);
                     const searchQuery = searchBar.value.trim().toLowerCase();
+                    const showOnlyDiscounts = discountFilter.checked;
 
                     let visibleCount = 0;
 
@@ -1371,6 +1391,7 @@
                             .getAttribute("data-sizes")
                             .split(",");
                         const itemColor = product.getAttribute("data-color");
+                        const isDiscounted = product.getAttribute("data-discount") === "true";
 
                         const matchCategory =
                             selectedCategory === "all" ||
@@ -1385,13 +1406,15 @@
                         const matchColor =
                             activeColors.length === 0 ||
                             activeColors.includes(itemColor);
+                        const matchDiscount = !showOnlyDiscounts || isDiscounted;
 
                         if (
                             matchCategory &&
                             matchPrice &&
                             matchSearch &&
                             matchSize &&
-                            matchColor
+                            matchColor &&
+                            matchDiscount
                         ) {
                             product.classList.remove("d-none");
                             visibleCount++;
@@ -1447,6 +1470,7 @@
                 });
                 searchBar.addEventListener("input", filterAndSort);
                 sortSelect.addEventListener("change", filterAndSort);
+                discountFilter.addEventListener("change", filterAndSort);
 
                 // Botón reiniciar filtros
                 resetBtn.addEventListener("click", () => {
@@ -1455,6 +1479,7 @@
                     priceValue.textContent = "200";
                     searchBar.value = "";
                     sortSelect.value = "default";
+                    discountFilter.checked = false;
 
                     sizeBoxes.forEach((b) => b.classList.remove("active"));
                     colorSwatches.forEach((s) => s.classList.remove("active"));
