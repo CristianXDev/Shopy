@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Boutique Moderna</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Google Fonts: Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --dark-grey: #121212;
+            --soft-white: #ffffff;
+            --off-white: #f8f9fa;
+            --accent-color: #333333;
+            --light-grey: #eaeaea;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--soft-white);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
+        .modern-navbar {
+            background-color: var(--dark-grey);
+            padding: 12px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        .modern-navbar .navbar-brand,
+        .modern-navbar .nav-link,
+        .modern-navbar .login-link {
+            color: var(--soft-white) !important;
+            font-weight: 600;
+        }
+        .navbar-brand {
+            line-height: 1.1;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .modern-navbar .nav-link {
+            margin: 0 12px;
+            font-size: 0.95rem;
+            transition: opacity 0.3s ease;
+        }
+        .modern-navbar .nav-link:hover,
+        .modern-navbar .nav-link.active {
+            opacity: 0.7;
+        }
+        .login-link {
+            text-decoration: none;
+            font-size: 1.4rem;
+            transition: transform 0.2s ease;
+        }
+        .login-link:hover {
+            transform: translateY(-3px);
+        }
+        .navbar-toggler {
+            border: none;
+            color: var(--soft-white);
+            font-size: 1.8rem;
+        }
+
+        /* HEADER DE PÁGINA */
+        .page-header {
+            background-color: var(--dark-grey);
+            color: var(--soft-white);
+            padding: 140px 0 80px 0;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-weight: 800;
+            font-size: 3.5rem;
+            letter-spacing: -1.5px;
+            margin-bottom: 15px;
+        }
+        .page-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* SECCIÓN DE CONTACTO */
+        .contact-section {
+            padding: 80px 0;
+            background-color: var(--off-white);
+        }
+
+        /* Tarjeta de Información */
+        .contact-info-block {
+            background-color: var(--soft-white);
+            border: 1px solid var(--light-grey);
+            border-radius: 20px;
+            padding: 50px 40px;
+            height: 100%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+        }
+        .contact-info-block h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark-grey);
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+        }
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 35px;
+        }
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--off-white);
+            border: 1px solid var(--light-grey);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--dark-grey);
+            margin-right: 20px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        .info-item:hover .info-icon {
+            background-color: var(--dark-grey);
+            color: var(--soft-white);
+            border-color: var(--dark-grey);
+        }
+        .info-content h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--dark-grey);
+            margin-bottom: 5px;
+        }
+        .info-content p {
+            color: #666;
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Tarjeta de Formulario */
+        .contact-form-block {
+            background-color: var(--soft-white);
+            border: 1px solid var(--light-grey);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            height: 100%;
+        }
+        .contact-form-block h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--dark-grey);
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+        .contact-form-block > p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+        .form-label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--dark-grey);
+            margin-bottom: 8px;
+            display: block;
+        }
+        .form-control-custom {
+            border: 1px solid var(--light-grey);
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--dark-grey);
+            background-color: var(--soft-white);
+            transition: all 0.3s ease;
+            box-shadow: none !important;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .form-control-custom::placeholder {
+            color: #bbb;
+            font-weight: 400;
+        }
+        .form-control-custom:focus {
+            border-color: var(--dark-grey);
+            background-color: var(--soft-white);
+        }
+        textarea.form-control-custom {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .btn-submit-contact {
+            background-color: var(--dark-grey);
+            color: var(--soft-white);
+            border: none;
+            border-radius: 8px;
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .btn-submit-contact:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        /* IMAGEN DE UBICACIÓN */
+        .location-image-section {
+            padding-bottom: 80px;
+            background-color: var(--off-white);
+        }
+        .location-image-wrapper {
+            border-radius: 20px;
+            overflow: hidden;
+            height: 400px;
+            position: relative;
+        }
+        .location-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .location-overlay {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(255,255,255,0.95);
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+        .location-overlay h4 {
+            font-weight: 800;
+            color: var(--dark-grey);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        .location-overlay p {
+            margin: 0;
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* FOOTER */
+        .modern-footer {
+            background-color: var(--dark-grey);
+            color: var(--soft-white);
+            padding: 90px 0 30px 0;
+        }
+        .footer-brand {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: var(--soft-white);
+        }
+        .footer-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1rem;
+            margin-bottom: 30px;
+            max-width: 320px;
+            line-height: 1.6;
+        }
+        .footer-links h5 {
+            font-weight: 800;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+        }
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-links ul li {
+            margin-bottom: 18px;
+        }
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            display: inline-block;
+        }
+        .footer-links ul li a:hover {
+            color: var(--soft-white);
+            transform: translateX(8px);
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--soft-white);
+            font-size: 1.4rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .social-icons a:hover {
+            background: var(--soft-white);
+            color: var(--dark-grey);
+            border-color: var(--soft-white);
+        }
+        .newsletter-form {
+            display: flex;
+            background-color: var(--soft-white);
+            border-radius: 50px;
+            padding: 5px;
+            margin-top: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .newsletter-form input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            color: var(--dark-grey);
+            padding: 12px 20px;
+            font-weight: 600;
+            outline: none;
+        }
+        .newsletter-form button {
+            background-color: var(--dark-grey);
+            color: var(--soft-white);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .newsletter-form button:hover {
+            background-color: var(--accent-color);
+        }
+        .footer-bottom {
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top modern-navbar" id="mainNavbar">
+        <div class="container-fluid px-4 px-md-5">
+            <a class="navbar-brand fw-bold" href="#">logo<br />here</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                <i class="bx bx-menu"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sale</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-4 mt-3 mt-lg-0">
+                    <a href="#" class="login-link"><i class="bx bx-user"></i></a>
+                    <a href="#" class="login-link"><i class="bx bx-cart"></i></a>
+                    <a href="#" class="login-link"><i class="bx bx-heart"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER DE PÁGINA -->
+    <header class="page-header">
+        <div class="container">
+            <h1>Contacto</h1>
+            <p>Estamos aquí para escucharte. Ya sea para una consulta, asesoría o feedback, nuestro equipo de soporte está a tu disposición.</p>
+        </div>
+    </header>
+
+    <!-- SECCIÓN PRINCIPAL DE CONTACTO -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="row g-5">
+                <!-- Información de Contacto -->
+                <div class="col-lg-5">
+                    <div class="contact-info-block">
+                        <h3>Ponte en contacto</h3>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class='bx bx-map'></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Visítanos</h4>
+                                <p>Av. Principal Moda 123,<br>Distrito Creativo, Ciudad 45000</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class='bx bx-envelope'></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Escríbenos</h4>
+                                <p>hola@boutiquemoderna.com<br>soporte@boutiquemoderna.com</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class='bx bx-phone-call'></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Llámanos</h4>
+                                <p>+1 (234) 567-8900<br>Lunes a Viernes, 9:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario de Contacto -->
+                <div class="col-lg-7">
+                    <div class="contact-form-block">
+                        <h3>Envíanos un mensaje</h3>
+                        <p>Completa el siguiente formulario y un asesor se pondrá en contacto contigo en menos de 24 horas.</p>
+
+                        <form action="#" method="POST">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Nombre Completo</label>
+                                    <input type="text" id="name" class="form-control-custom" placeholder="Ej. Juan Pérez" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Correo Electrónico</label>
+                                    <input type="email" id="email" class="form-control-custom" placeholder="tu@correo.com" required>
+                                </div>
+                            </div>
+
+                            <label for="subject" class="form-label">Asunto</label>
+                            <input type="text" id="subject" class="form-control-custom" placeholder="¿Sobre qué nos escribes?" required>
+
+                            <label for="message" class="form-label">Mensaje</label>
+                            <textarea id="message" class="form-control-custom" placeholder="Escribe tu mensaje aquí..." required></textarea>
+
+                            <button type="submit" class="btn-submit-contact">Enviar Mensaje <i class='bx bx-send ms-2'></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMAGEN / MAPA DE UBICACIÓN -->
+    <section class="location-image-section">
+        <div class="container">
+            <div class="location-image-wrapper">
+                <!-- Imagen placeholder simulando un local moderno o ubicación -->
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop" alt="Ubicación de la tienda">
+                <div class="location-overlay">
+                    <h4>Boutique Flagship</h4>
+                    <p>Abierto de Lunes a Sábado</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER MODERNO -->
+    <footer class="modern-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
+                    <a href="#" class="footer-brand">logo<br />here</a>
+                    <p class="footer-text">
+                        Redefiniendo el estilo moderno. Descubre piezas exclusivas diseñadas para destacar tu esencia con la más alta calidad y atención al detalle.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#"><i class="bx bxl-instagram"></i></a>
+                        <a href="#"><i class="bx bxl-tiktok"></i></a>
+                        <a href="#"><i class="bx bxl-facebook"></i></a>
+                        <a href="#"><i class="bx bxl-pinterest-alt"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h5>Tienda</h5>
+                    <ul>
+                        <li><a href="#">Nueva Colección</a></li>
+                        <li><a href="#">Más Vendidos</a></li>
+                        <li><a href="#">Ofertas (Sale)</a></li>
+                        <li><a href="#">Accesorios</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h5>Soporte</h5>
+                    <ul>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Envíos y Devoluciones</a></li>
+                        <li><a href="#">Guía de Tallas</a></li>
+                        <li><a href="#" class="active">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 footer-links">
+                    <h5>Únete al Club</h5>
+                    <p class="footer-text" style="font-size: 0.95rem; margin-bottom: 15px">
+                        Suscríbete y recibe un 10% de descuento en tu primera compra, además de acceso anticipado a nuestras colecciones.
+                    </p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Tu correo electrónico">
+                        <button type="button">Unirme</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2026 LogoHere Boutique. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

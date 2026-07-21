@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Carrito de Compras | Boutique Moderna</title>
+
+        <!-- Bootstrap 5 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <!-- Boxicons -->
+        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+        <!-- Google Fonts: Nunito -->
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
+
+        <style>
+            :root {
+                --dark-grey: #121212;
+                --soft-white: #ffffff;
+                --off-white: #f8f9fa;
+                --star-gold: #fbbc04;
+                --accent-color: #333333;
+                --light-grey: #e0e0e0;
+            }
+
+            body {
+                font-family: "Nunito", sans-serif;
+                background-color: var(--soft-white);
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+            }
+
+            /* =========================================
+               NAVBAR (Fijo oscuro) - Reutilizado
+               ========================================= */
+            .modern-navbar {
+                background-color: var(--dark-grey);
+                padding: 12px 0;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .modern-navbar .navbar-brand,
+            .modern-navbar .nav-link,
+            .modern-navbar .login-link {
+                color: var(--soft-white) !important;
+                font-weight: 600;
+            }
+
+            .navbar-brand {
+                line-height: 1.1;
+                font-size: 1.5rem;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+            }
+
+            .modern-navbar .nav-link { margin: 0 12px; font-size: 0.95rem; }
+            .modern-navbar .nav-link:hover { opacity: 0.7; }
+            .login-link { text-decoration: none; font-size: 1.4rem; transition: transform 0.2s ease; }
+            .login-link:hover { transform: translateY(-3px); }
+            .navbar-toggler { border: none; color: var(--soft-white); font-size: 1.8rem; }
+
+            /* =========================================
+               BREADCRUMBS & HEADER
+               ========================================= */
+            .cart-header-section { margin-top: 100px; padding: 20px 0; }
+            .breadcrumb { font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; }
+            .breadcrumb a { color: #888; text-decoration: none; transition: color 0.2s; }
+            .breadcrumb a:hover { color: var(--dark-grey); }
+            .breadcrumb-item.active { color: var(--dark-grey); }
+            .breadcrumb-item + .breadcrumb-item::before { content: ">"; color: #ccc; }
+            .page-title { font-size: 2.2rem; font-weight: 800; color: var(--dark-grey); margin-bottom: 30px; letter-spacing: -0.5px; }
+
+            /* =========================================
+               ESTILOS DEL CARRITO (ITEMS)
+               ========================================= */
+            .cart-item {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                padding: 20px;
+                background-color: var(--soft-white);
+                border: 1px solid #f0f0f0;
+                border-radius: 20px;
+                margin-bottom: 20px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+                transition: transform 0.3s ease;
+            }
+            .cart-item:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); }
+
+            .cart-item-img {
+                width: 100px; height: 120px;
+                border-radius: 12px; object-fit: cover;
+                background-color: var(--off-white);
+            }
+
+            .cart-item-details { flex-grow: 1; }
+            .cart-item-title { font-size: 1.1rem; font-weight: 800; color: var(--dark-grey); margin-bottom: 5px; }
+            .cart-item-meta { font-size: 0.85rem; color: #777; margin-bottom: 10px; font-weight: 600; }
+
+            .cart-item-price { font-size: 1.2rem; font-weight: 800; color: var(--dark-grey); }
+
+            .quantity-selector {
+                display: inline-flex; align-items: center;
+                border: 2px solid var(--light-grey); border-radius: 50px;
+                padding: 3px 10px; background: var(--soft-white);
+            }
+            .qty-btn { background: none; border: none; font-size: 1.1rem; color: var(--dark-grey); cursor: pointer; font-weight: bold; padding: 0 8px; }
+            .qty-input { width: 30px; text-align: center; border: none; font-weight: 800; font-size: 1rem; outline: none; background: transparent; }
+
+            .btn-remove { background: none; border: none; color: #dc3545; font-size: 1.5rem; cursor: pointer; transition: transform 0.2s; }
+            .btn-remove:hover { transform: scale(1.1); }
+
+            /* =========================================
+               ESTILOS DEL RESUMEN Y PASARELA DE PAGO
+               ========================================= */
+            .summary-card {
+                background-color: var(--off-white);
+                border-radius: 24px;
+                padding: 30px;
+                position: sticky;
+                top: 90px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            }
+            .summary-title { font-weight: 800; font-size: 1.3rem; margin-bottom: 25px; color: var(--dark-grey); }
+
+            .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 1rem; font-weight: 600; color: #555; }
+            .summary-total { display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 2px dashed #ddd; font-size: 1.4rem; font-weight: 800; color: var(--dark-grey); }
+
+            /* Mini Pasarela de Pago */
+            .payment-section { margin-top: 30px; }
+            .payment-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 15px; color: var(--dark-grey); }
+
+            .nav-pills .nav-link {
+                border-radius: 50px; color: #555; font-weight: 700; font-size: 0.9rem; padding: 8px 16px; margin-right: 5px; border: 1px solid var(--light-grey); transition: all 0.3s;
+            }
+            .nav-pills .nav-link.active { background-color: var(--dark-grey); color: var(--soft-white); border-color: var(--dark-grey); }
+
+            .payment-form { background: var(--soft-white); padding: 20px; border-radius: 16px; border: 1px solid #eee; margin-top: 15px; }
+
+            .form-control, .form-select {
+                border-radius: 12px; border: 1px solid var(--light-grey); padding: 10px 15px; font-weight: 600; font-size: 0.9rem; background-color: var(--off-white); transition: all 0.3s;
+            }
+            .form-control:focus, .form-select:focus { border-color: var(--dark-grey); box-shadow: 0 0 0 0.2rem rgba(18,18,18,0.1); background-color: var(--soft-white); }
+            .form-label { font-size: 0.85rem; font-weight: 800; color: #555; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+            .input-group-text { border-radius: 12px 0 0 12px; border: 1px solid var(--light-grey); background-color: var(--soft-white); font-weight: 700; color: var(--dark-grey); }
+            .form-control.input-with-group { border-radius: 0 12px 12px 0; }
+
+            .btn-checkout {
+                width: 100%; background-color: var(--dark-grey); color: var(--soft-white); border: none; border-radius: 50px; padding: 15px; font-weight: 800; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; margin-top: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            }
+            .btn-checkout:hover { transform: translateY(-3px); background-color: var(--accent-color); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
+
+            /* =========================================
+               FOOTER MODERNO - Reutilizado
+               ========================================= */
+            .modern-footer { background-color: var(--dark-grey); color: var(--soft-white); padding: 90px 0 30px 0; margin-top: 80px; }
+            .footer-brand { font-size: 2.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; display: inline-block; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; color: var(--soft-white); }
+            .footer-text { color: rgba(255, 255, 255, 0.6); font-size: 1rem; margin-bottom: 30px; max-width: 320px; line-height: 1.6; }
+            .footer-links h5 { font-weight: 800; margin-bottom: 30px; font-size: 1.2rem; letter-spacing: 0.5px; }
+            .footer-links ul { list-style: none; padding: 0; margin: 0; }
+            .footer-links ul li { margin-bottom: 18px; }
+            .footer-links ul li a { color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: all 0.3s ease; display: inline-block; font-size: 0.95rem; }
+            .footer-links ul li a:hover { color: var(--soft-white); transform: translateX(8px); }
+            .social-icons { display: flex; gap: 15px; }
+            .social-icons a { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); color: var(--soft-white); font-size: 1.4rem; text-decoration: none; transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.05); }
+            .social-icons a:hover { background: var(--soft-white); color: var(--dark-grey); transform: translateY(-5px); border-color: var(--soft-white); }
+            .footer-bottom { margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; color: rgba(255, 255, 255, 0.4); font-size: 0.95rem; }
+
+            /* Ajustes Móvil */
+            @media (max-width: 768px) {
+                .cart-item { flex-direction: column; position: relative; padding-top: 40px; }
+                .btn-remove { position: absolute; top: 15px; right: 15px; }
+                .cart-item-img { width: 100%; height: 200px; }
+                .nav-pills { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 10px; }
+                .nav-pills .nav-link { white-space: nowrap; }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg fixed-top modern-navbar" id="mainNavbar">
+            <div class="container-fluid px-4 px-md-5">
+                <a class="navbar-brand fw-bold" href="#">logo<br />here</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                    <i class="bx bx-menu"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navContent">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Sale</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    </ul>
+                    <div class="d-flex align-items-center gap-4 mt-3 mt-lg-0">
+                        <a href="#" class="login-link"><i class="bx bx-user"></i></a>
+                        <a href="#" class="login-link" style="color: var(--star-gold) !important;"><i class="bx bxs-cart"></i></a>
+                        <a href="#" class="login-link"><i class="bx bx-heart"></i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- HEADER DEL CARRITO -->
+        <section class="container cart-header-section">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="#">Tienda</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Carrito</li>
+                </ol>
+            </nav>
+            <h1 class="page-title">Tu Carrito de Compras</h1>
+        </section>
+
+        <!-- SECCIÓN PRINCIPAL DEL CARRITO -->
+        <section class="container mb-5">
+            <div class="row gx-lg-5">
+
+                <!-- COLUMNA IZQUIERDA: PRODUCTOS -->
+                <div class="col-lg-7 mb-5 mb-lg-0">
+
+                    <!-- Producto 1 -->
+                    <div class="cart-item">
+                        <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=200&auto=format&fit=crop" alt="Blusa" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <h3 class="cart-item-title">Blusa Asimétrica de Lino Premium</h3>
+                            <div class="cart-item-meta">Color: Blanco Puro | Talla: M</div>
+                            <div class="d-flex align-items-center justify-content-between mt-3">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn" onclick="updateQty('qty1', -1)">-</button>
+                                    <input type="text" class="qty-input" id="qty1" value="1" readonly>
+                                    <button class="qty-btn" onclick="updateQty('qty1', 1)">+</button>
+                                </div>
+                                <div class="cart-item-price">$45.00</div>
+                            </div>
+                        </div>
+                        <button class="btn-remove" title="Eliminar"><i class='bx bx-trash'></i></button>
+                    </div>
+
+                    <!-- Producto 2 -->
+                    <div class="cart-item">
+                        <img src="https://images.unsplash.com/photo-1550614000-4b95d4ebfa49?q=80&w=200&auto=format&fit=crop" alt="Pantalón" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <h3 class="cart-item-title">Pantalón Cargo Urbano</h3>
+                            <div class="cart-item-meta">Color: Gris Oscuro | Talla: L</div>
+                            <div class="d-flex align-items-center justify-content-between mt-3">
+                                <div class="quantity-selector">
+                                    <button class="qty-btn" onclick="updateQty('qty2', -1)">-</button>
+                                    <input type="text" class="qty-input" id="qty2" value="2" readonly>
+                                    <button class="qty-btn" onclick="updateQty('qty2', 1)">+</button>
+                                </div>
+                                <div class="cart-item-price">$170.00</div>
+                            </div>
+                        </div>
+                        <button class="btn-remove" title="Eliminar"><i class='bx bx-trash'></i></button>
+                    </div>
+
+                    <a href="#" class="text-dark fw-bold text-decoration-none mt-3 d-inline-block"><i class='bx bx-left-arrow-alt'></i> Continuar comprando</a>
+                </div>
+
+                <!-- COLUMNA DERECHA: RESUMEN Y PAGO -->
+                <div class="col-lg-5">
+                    <div class="summary-card">
+                        <h2 class="summary-title">Resumen de Orden</h2>
+
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>$215.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Envío (MRW / Zoom)</span>
+                            <span>Gratis</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Total</span>
+                            <span>$215.00</span>
+                        </div>
+                        <p class="text-muted text-end mt-1" style="font-size: 0.8rem; font-weight: 700;">Ref: Bs. 7.955,00 (Tasa BCV)</p>
+
+                        <!-- MINI PASARELA DE PAGO VENEZUELA -->
+                        <div class="payment-section">
+                            <h3 class="payment-title">Método de Pago</h3>
+
+                            <!-- Tabs de Pago -->
+                            <ul class="nav nav-pills mb-3" id="paymentTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="pago-movil-tab" data-bs-toggle="pill" data-bs-target="#pago-movil" type="button" role="tab"><i class='bx bx-mobile-alt'></i> Pago Móvil</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="zelle-tab" data-bs-toggle="pill" data-bs-target="#zelle" type="button" role="tab"><i class='bx bx-dollar-circle'></i> Zelle</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="efectivo-tab" data-bs-toggle="pill" data-bs-target="#efectivo" type="button" role="tab"><i class='bx bx-store'></i> Efectivo</button>
+                                </li>
+                            </ul>
+
+                            <!-- Contenido de Tabs -->
+                            <div class="tab-content" id="paymentTabsContent">
+
+                                <!-- FORMULARIO PAGO MÓVIL -->
+                                <div class="tab-pane fade show active" id="pago-movil" role="tabpanel">
+                                    <div class="payment-form">
+                                        <div class="alert alert-secondary p-2 mb-3 text-center" style="font-size: 0.85rem; border-radius: 12px;">
+                                            <strong>Datos:</strong> 0414-1234567 | V-12345678 | Banesco
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Banco Emisor</label>
+                                            <select class="form-select">
+                                                <option selected disabled>Selecciona tu banco</option>
+                                                <option value="banesco">Banesco (0134)</option>
+                                                <option value="mercantil">Mercantil (0105)</option>
+                                                <option value="provincial">Provincial (0108)</option>
+                                                <option value="bdv">Banco de Venezuela (0102)</option>
+                                                <option value="bnc">BNC (0191)</option>
+                                            </select>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6 mb-3">
+                                                <label class="form-label">Cédula</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">V-</span>
+                                                    <input type="text" class="form-control input-with-group" placeholder="12345678">
+                                                </div>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <label class="form-label">Teléfono</label>
+                                                <input type="text" class="form-control" placeholder="0414...">
+                                            </div>
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label">Nro. de Referencia</label>
+                                            <input type="text" class="form-control" placeholder="Últimos 4 o 6 dígitos">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FORMULARIO ZELLE -->
+                                <div class="tab-pane fade" id="zelle" role="tabpanel">
+                                    <div class="payment-form">
+                                        <div class="alert alert-secondary p-2 mb-3 text-center" style="font-size: 0.85rem; border-radius: 12px;">
+                                            <strong>Zelle:</strong> pagos@boutique.com<br>Titular: Boutique LLC
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Nombre del Titular de la Cuenta</label>
+                                            <input type="text" class="form-control" placeholder="Ej. Juan Pérez">
+                                        </div>
+                                        <div class="mb-2">
+                                            <label class="form-label">Nro. de Confirmación</label>
+                                            <input type="text" class="form-control" placeholder="Número de confirmación de Zelle">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FORMULARIO EFECTIVO -->
+                                <div class="tab-pane fade" id="efectivo" role="tabpanel">
+                                    <div class="payment-form text-center py-4">
+                                        <i class='bx bx-money fs-1 mb-2 text-success'></i>
+                                        <p class="mb-0 fw-bold text-dark">Pago en Tienda / Delivery</p>
+                                        <p class="text-muted" style="font-size: 0.9rem;">Por favor, ten el monto exacto ($215.00) preparado al momento de retirar en nuestra sucursal o recibir tu delivery.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BOTÓN FINAL -->
+                        <button class="btn-checkout">
+                            <i class='bx bx-check-shield'></i> Confirmar Pedido
+                        </button>
+                        <p class="text-center text-muted mt-3 mb-0" style="font-size: 0.75rem;"><i class='bx bx-lock-alt'></i> Transacción 100% segura y verificada.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FOOTER MODERNO -->
+        <footer class="modern-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
+                        <a href="#" class="footer-brand">logo<br />here</a>
+                        <p class="footer-text">
+                            Redefiniendo el estilo moderno. Descubre piezas
+                            exclusivas diseñadas para destacar tu esencia con la
+                            más alta calidad y atención al detalle.
+                        </p>
+                        <div class="social-icons">
+                            <a href="#"><i class="bx bxl-instagram"></i></a>
+                            <a href="#"><i class="bx bxl-tiktok"></i></a>
+                            <a href="#"><i class="bx bxl-facebook"></i></a>
+                            <a href="#"><i class="bx bxl-pinterest-alt"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h5>Tienda</h5>
+                        <ul>
+                            <li><a href="#">Nueva Colección</a></li>
+                            <li><a href="#">Más Vendidos</a></li>
+                            <li><a href="#">Ofertas (Sale)</a></li>
+                            <li><a href="#">Accesorios</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h5>Soporte</h5>
+                        <ul>
+                            <li><a href="#">Preguntas Frecuentes</a></li>
+                            <li><a href="#">Envíos y Devoluciones</a></li>
+                            <li><a href="#">Guía de Tallas</a></li>
+                            <li><a href="#">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-md-6 footer-links">
+                        <h5>Únete al Club</h5>
+                        <p class="footer-text" style="font-size: 0.95rem; margin-bottom: 15px">
+                            Suscríbete y recibe un 10% de descuento en tu primera compra.
+                        </p>
+                        <div class="d-flex" style="background: white; border-radius: 50px; padding: 5px;">
+                            <input type="email" placeholder="Tu correo" style="border: none; flex-grow: 1; padding: 0 15px; outline: none; border-radius: 50px;">
+                            <button class="btn" style="background: var(--dark-grey); color: white; border-radius: 50px; padding: 10px 25px; font-weight: bold;">Unirme</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap 5 JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Lógica Básica -->
+        <script>
+            // Selector de Cantidad en el carrito
+            function updateQty(inputId, change) {
+                const input = document.getElementById(inputId);
+                let currentVal = parseInt(input.value);
+                let newVal = currentVal + change;
+                if (newVal >= 1 && newVal <= 10) {
+                    input.value = newVal;
+                }
+            }
+        </script>
+    </body>
+</html>
