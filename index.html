@@ -14,385 +14,7 @@
     <!-- Google Fonts: Nunito -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --dark-grey: #121212;
-            --soft-white: #ffffff;
-            --off-white: #f8f9fa;
-            --star-gold: #fbbc04;
-            --accent-color: #333333;
-        }
-
-        body {
-            font-family: 'Nunito', sans-serif;
-            background-color: var(--soft-white);
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
-        /* =========================================
-           ESTILOS DE LA NAVBAR
-           ========================================= */
-        .modern-navbar {
-            background-color: transparent;
-            padding: 20px 0;
-            transition: all 0.4s ease-in-out;
-        }
-
-        .modern-navbar .navbar-brand,
-        .modern-navbar .nav-link,
-        .modern-navbar .login-link {
-            color: var(--soft-white) !important;
-            font-weight: 600;
-            transition: color 0.4s ease-in-out;
-        }
-
-        .navbar-brand {
-            line-height: 1.1;
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .modern-navbar .nav-link { margin: 0 12px; font-size: 0.95rem; }
-        .modern-navbar .nav-link:hover { opacity: 0.7; }
-
-        .modern-navbar.scrolled {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            padding: 12px 0;
-        }
-
-        .modern-navbar.scrolled .navbar-brand,
-        .modern-navbar.scrolled .nav-link,
-        .modern-navbar.scrolled .login-link {
-            color: var(--dark-grey) !important;
-        }
-
-        .login-link {
-            text-decoration: none;
-            font-size: 1.4rem;
-            transition: transform 0.2s ease;
-        }
-
-        .login-link:hover { transform: translateY(-3px); }
-
-        .navbar-toggler {
-            border: none;
-            color: var(--soft-white);
-            font-size: 1.8rem;
-        }
-
-        .modern-navbar.scrolled .navbar-toggler { color: var(--dark-grey); }
-        .navbar-toggler:focus { box-shadow: none; }
-
-        /* =========================================
-           SECCIÓN HERO
-           ========================================= */
-        .hero-section {
-            height: 100vh;
-            background-color: var(--dark-grey);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--soft-white);
-            text-align: center;
-            padding-top: 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Pequeño toque visual de fondo */
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-        }
-
-        /* =========================================
-           COMPONENTE DE RESEÑAS
-           ========================================= */
-        .reviews-badge {
-            margin-top: 40px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 50px;
-            padding: 12px 30px;
-            display: inline-flex;
-            align-items: center;
-            gap: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
-            z-index: 2;
-        }
-
-        .reviews-badge:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.06); }
-
-        .reviews-info { display: flex; align-items: center; gap: 10px; }
-        .reviews-stars i { color: var(--star-gold); font-size: 1.3rem; margin: 0 1px; }
-
-        .reviews-text { font-size: 0.95rem; font-weight: 600; letter-spacing: 0.3px; margin-top: 2px; }
-        .reviews-text span { font-weight: 800; }
-
-        .avatars-container { display: flex; align-items: center; justify-content: center; }
-        .avatar-circle {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            border: 2px solid var(--dark-grey);
-            object-fit: cover;
-            margin-left: -15px;
-            transition: transform 0.2s ease;
-        }
-        .avatar-circle:hover { transform: translateY(-4px); z-index: 10; }
-        .avatar-circle:first-child { margin-left: 0; }
-        .avatar-count {
-            background-color: var(--soft-white); color: var(--dark-grey);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.8rem; font-weight: 800; z-index: 5;
-        }
-
-        /* =========================================
-           GALERÍA DE IMÁGENES
-           ========================================= */
-        .gallery-section { padding-top: 100px; background-color: var(--soft-white); }
-        .section-title { color: var(--dark-grey); font-weight: 800; text-align: center; margin-bottom: 50px; font-size: 2.8rem; }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 280px;
-            gap: 25px;
-            padding: 0 25px;
-        }
-
-        .gallery-item {
-            position: relative; border-radius: 20px; overflow: hidden;
-            background-color: var(--off-white);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.06); cursor: pointer;
-        }
-
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-        .gallery-item:hover img { transform: scale(1.06); }
-
-        .sale-badge {
-            position: absolute; top: 15px; right: 15px;
-            background-color: var(--dark-grey); color: var(--soft-white);
-            width: 50px; height: 50px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.9rem; font-weight: 800; z-index: 5;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .item-overlay {
-            position: absolute; inset: 0;
-            background: rgba(18, 18, 18, 0.45);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 15px; opacity: 0; transition: opacity 0.4s ease; z-index: 10;
-        }
-
-        .gallery-item:hover .item-overlay { opacity: 1; }
-
-        .overlay-btn, .overlay-btn-outline {
-            text-decoration: none; display: flex; align-items: center; gap: 8px;
-            font-weight: 700; font-size: 0.95rem; border-radius: 50px;
-            transform: translateY(20px); transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .overlay-btn { background-color: var(--soft-white); color: var(--dark-grey); padding: 12px 28px; border: none; }
-        .overlay-btn-outline { background-color: transparent; color: var(--soft-white); border: 2px solid var(--soft-white); padding: 10px 26px; }
-
-        .gallery-item:hover .overlay-btn, .gallery-item:hover .overlay-btn-outline { transform: translateY(0); }
-        .overlay-btn:hover { background-color: #f0f0f0; transform: scale(1.05) !important; }
-        .overlay-btn-outline:hover { background-color: var(--soft-white); color: var(--dark-grey); }
-
-        .item-large { grid-column: span 2; grid-row: span 2; }
-        .item-wide { grid-column: span 2; grid-row: span 1; }
-        .item-tall { grid-column: span 1; grid-row: span 2; }
-        .item-normal { grid-column: span 1; grid-row: span 1; }
-
-        .hidden-photo { display: none !important; }
-        .toggle-photo { animation: fadeIn 0.6s ease forwards; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .btn-modern {
-            background-color: var(--dark-grey); color: var(--soft-white);
-            border-radius: 50px; padding: 16px 45px;
-            font-size: 1.1rem; font-weight: 800; border: none;
-            transition: all 0.3s ease; margin-top: 60px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-        .btn-modern:hover { background-color: var(--accent-color); transform: translateY(-4px); box-shadow: 0 15px 35px rgba(0,0,0,0.25); }
-
-        /* =========================================
-           ONDAS DIVISORAS
-           ========================================= */
-        .wave-divider-top { width: 100%; height: 120px; margin-top: 60px; line-height: 0; overflow: hidden; background-color: var(--soft-white); }
-        .wave-divider-top svg { width: 100%; height: 100%; }
-
-        .wave-divider-bottom { width: 100%; height: 120px; line-height: 0; overflow: hidden; background-color: var(--dark-grey); }
-        .wave-divider-bottom svg { width: 100%; height: 100%; }
-
-        /* =========================================
-           SECCIÓN DE BENEFICIOS
-           ========================================= */
-        .benefits-section { background-color: var(--dark-grey); color: var(--soft-white); padding: 30px 0 0 0; }
-        .benefit-item { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px; }
-        .icon-glass {
-            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.08); width: 85px; height: 85px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--soft-white);
-            margin-bottom: 25px; transition: all 0.4s ease; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-        .benefit-item:hover .icon-glass { transform: translateY(-10px) rotate(5deg); background: rgba(255, 255, 255, 0.08); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); }
-        .benefit-item h3 { font-weight: 800; font-size: 1.3rem; margin-bottom: 12px; letter-spacing: 0.5px; }
-        .benefit-item p { color: rgba(255, 255, 255, 0.6); font-size: 1rem; max-width: 260px; margin: 0 auto; line-height: 1.6; }
-
-        /* =========================================
-           CARRUSEL DE TESTIMONIOS (Infinito)
-           ========================================= */
-        .testimonials-section { padding: 40px 0 100px 0; background-color: var(--soft-white); overflow: hidden; }
-
-        .carousel-container {
-            width: 100%;
-            position: relative;
-            padding: 30px 0;
-            /* Máscara para difuminar los bordes laterales y dar un efecto más limpio */
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        }
-
-        .carousel-track {
-            display: flex;
-            gap: 30px;
-            width: max-content;
-            /* Animación infinita */
-            animation: scrollCarousel 40s linear infinite;
-        }
-
-        /* Pausar animación al pasar el ratón */
-        .carousel-track:hover { animation-play-state: paused; }
-
-        @keyframes scrollCarousel {
-            0% { transform: translateX(0); }
-            /* Se desplaza exactamente la mitad del ancho total de la pista (porque duplicaremos los items) */
-            100% { transform: translateX(calc(-50% - 15px)); }
-        }
-
-        .testimonial-card {
-            width: 400px; /* Ancho fijo para las tarjetas */
-            flex-shrink: 0;
-            background-color: var(--soft-white);
-            border: 1px solid #eaeaea;
-            border-radius: 24px;
-            padding: 40px 35px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex; flex-direction: column; justify-content: space-between;
-        }
-
-        .testimonial-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); border-color: transparent; }
-
-        .testimonial-header { display: flex; align-items: center; gap: 18px; margin-bottom: 25px; }
-        .testimonial-header img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .user-info h4 { margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--dark-grey); }
-        .user-info .stars { color: var(--star-gold); font-size: 1rem; margin-top: 4px; }
-        .testimonial-text { color: #666; font-size: 1rem; line-height: 1.7; font-style: italic; }
-
-        /* =========================================
-           FOOTER MODERNO
-           ========================================= */
-        .modern-footer { background-color: var(--dark-grey); color: var(--soft-white); padding: 90px 0 30px 0; }
-        .footer-brand { font-size: 2.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; display: inline-block; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; color: var(--soft-white); }
-        .footer-text { color: rgba(255, 255, 255, 0.6); font-size: 1rem; margin-bottom: 30px; max-width: 320px; line-height: 1.6; }
-
-        .footer-links h5 { font-weight: 800; margin-bottom: 30px; font-size: 1.2rem; letter-spacing: 0.5px; }
-        .footer-links ul { list-style: none; padding: 0; margin: 0; }
-        .footer-links ul li { margin-bottom: 18px; }
-        .footer-links ul li a { color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: all 0.3s ease; display: inline-block; font-size: 0.95rem; }
-        .footer-links ul li a:hover { color: var(--soft-white); transform: translateX(8px); }
-
-        .social-icons { display: flex; gap: 15px; }
-        .social-icons a {
-            display: flex; align-items: center; justify-content: center; width: 48px; height: 48px;
-            border-radius: 50%; background: rgba(255, 255, 255, 0.05); color: var(--soft-white);
-            font-size: 1.4rem; text-decoration: none; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.05);
-        }
-        .social-icons a:hover { background: var(--soft-white); color: var(--dark-grey); transform: translateY(-5px); border-color: var(--soft-white); }
-
-        /* Estilos pulidos del Newsletter Input */
-        .newsletter-form {
-            display: flex;
-            background-color: var(--soft-white);
-            border-radius: 50px;
-            padding: 5px;
-            margin-top: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            border: none;
-            background: transparent;
-            color: var(--dark-grey);
-            padding: 12px 20px;
-            font-weight: 600;
-            outline: none;
-            box-shadow: none !important; /* Prevenir estilos de bootstrap focus */
-        }
-
-        .newsletter-form input::placeholder {
-            color: #999;
-            font-weight: 400;
-        }
-
-        .newsletter-form button {
-            background-color: var(--dark-grey);
-            color: var(--soft-white);
-            border: none;
-            border-radius: 50px;
-            padding: 12px 30px;
-            font-weight: 800;
-            transition: all 0.3s ease;
-        }
-
-        .newsletter-form button:hover {
-            background-color: var(--accent-color);
-            transform: scale(1.02);
-        }
-
-        .footer-bottom { margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; color: rgba(255, 255, 255, 0.4); font-size: 0.95rem; }
-
-        /* Ajustes Responsive */
-        @media (max-width: 992px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 768px) {
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 220px; gap: 15px; }
-            .item-large { grid-column: span 2; grid-row: span 2; }
-            .item-wide { grid-column: span 2; grid-row: span 1; }
-            .item-tall { grid-column: span 1; grid-row: span 2; }
-            .benefit-item { margin-bottom: 40px; }
-            .footer-links { margin-top: 50px; }
-            .testimonial-card { width: 320px; padding: 30px 25px; } /* Tarjetas más pequeñas en móvil */
-        }
-        @media (max-width: 576px) {
-            .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 280px; }
-            .item-large, .item-wide, .item-tall, .item-normal { grid-column: span 1; grid-row: span 1; }
-            .hero-section h1 { font-size: 15vw !important; }
-        }
-    </style>
+    <link href='css/style.css' rel='stylesheet'>
 </head>
 <body>
 
@@ -442,51 +64,64 @@
         </div>
     </header>
 
-    <!-- GALERÍA DE IMÁGENES -->
-    <section class="gallery-section container-fluid p-0">
+    <!-- GALERÍA DE IMÁGENES CON FILTROS -->
+    <section class="gallery-section container-fluid mt-5 p-0">
         <div class="container">
             <h2 class="section-title">New Arrivals</h2>
 
+            <!-- CONTROLES DE BÚSQUEDA Y FILTROS -->
+            <div class="gallery-controls">
+                <div class="search-wrapper">
+                    <i class="bx bx-search"></i>
+                    <input type="text" class="search-input" id="gallerySearch" placeholder="Buscar prendas o accesorios..." />
+                </div>
+                <select class="custom-select-picker" id="galleryFilter">
+                    <option value="all">Todas las categorías</option>
+                    <option value="ropa">Solo Ropa</option>
+                    <option value="accesorios">Solo Accesorios</option>
+                    <option value="oferta">En Oferta</option>
+                </select>
+            </div>
+
             <div class="gallery-grid" id="photoGallery">
-                <!-- Mismas imágenes de la galería previa -->
-                <div class="gallery-item item-large">
+                <div class="gallery-item item-large" data-title="Chaqueta negra de cuero" data-category="ropa oferta">
                     <div class="sale-badge">-15%</div>
                     <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir al carrito</a><a href="#" class="overlay-btn-outline"><i class='bx bx-show'></i> Ver más</a></div>
                 </div>
-                <div class="gallery-item item-wide">
-                    <img src="https://images.unsplash.com/photo-1434389678232-06798028ddc3?q=80&w=800&auto=format&fit=crop" alt="Fashion">
+                <div class="gallery-item item-wide" data-title="Suéter tejido casual" data-category="ropa">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=400&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir al carrito</a></div>
                 </div>
-                <div class="gallery-item item-normal">
+                <div class="gallery-item item-normal" data-title="Blusa elegante blanca" data-category="ropa oferta">
                     <div class="sale-badge">-30%</div>
                     <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=400&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a></div>
                 </div>
-                <div class="gallery-item item-tall">
-                    <img src="https://images.unsplash.com/photo-1550614000-4b95d4ebfa49?q=80&w=400&auto=format&fit=crop" alt="Fashion">
+                <div class="gallery-item item-tall" data-title="Pantalón casual" data-category="ropa">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a><a href="#" class="overlay-btn-outline"><i class='bx bx-show'></i> Ver más</a></div>
                 </div>
-                <div class="gallery-item item-normal">
+                <div class="gallery-item item-normal" data-title="Bolso de mano y gorro" data-category="accesorios">
                     <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=400&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a></div>
                 </div>
 
                 <!-- Fotos Ocultas -->
-                <div class="gallery-item item-wide toggle-photo hidden-photo">
+                <div class="gallery-item item-wide toggle-photo hidden-photo" data-title="Vestido de noche" data-category="ropa">
                     <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir al carrito</a></div>
                 </div>
-                <div class="gallery-item item-tall toggle-photo hidden-photo">
+                <div class="gallery-item item-tall toggle-photo hidden-photo" data-title="Botines de cuero" data-category="accesorios oferta">
                     <div class="sale-badge">-10%</div>
                     <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=400&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a></div>
                 </div>
-                <div class="gallery-item item-normal toggle-photo hidden-photo">
+                <div class="gallery-item item-normal toggle-photo hidden-photo" data-title="Sombrero clásico de sol" data-category="accesorios">
                     <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=400&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a></div>
                 </div>
-                <div class="gallery-item item-large toggle-photo hidden-photo">
+                <div class="gallery-item item-large toggle-photo hidden-photo" data-title="Abrigo moderno largo" data-category="ropa">
                     <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir al carrito</a><a href="#" class="overlay-btn-outline"><i class='bx bx-show'></i> Ver más</a></div>
                 </div>
@@ -497,6 +132,54 @@
                 <button class="btn-modern" id="togglePhotosBtn">Cargar más fotos</button>
             </div>
         </div>
+
+        <!-- SECCIÓN MUNDIAL INTRO (50vh) -->
+        <section class="wundial-intro-section mt-5">
+            <div class="container-fluid h-100 position-relative">
+                <div class="row h-100 align-items-center m-0">
+                    <!-- Texto Izquierdo -->
+                    <div class="col-md-3 text-center text-md-end z-index-2">
+                        <h2 class="wundial-side-text">Camisas del<br>Mundial</h2>
+                    </div>
+                    <!-- Balón Central -->
+                    <div class="col-md-6 d-flex justify-content-center align-items-center z-index-2">
+                    </div>
+                    <!-- Texto Derecho -->
+                    <div class="col-md-3 text-center text-md-start z-index-2">
+                        <h2 class="wundial-side-text">Ya<br>Disponible</h2>
+                    </div>
+                </div>
+                <!-- Botón inferior centrado (Absoluto) -->
+                <div class="position-absolute bottom-0 start-50 translate-middle-x pb-4 z-index-2">
+                    <a href="#wundial-collection" class="btn-modern">Ver colección</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN MUNDIAL COLECCIÓN (50vh pegado al anterior) -->
+        <section id="wundial-collection" class="wundial-collection-section">
+                <!-- Botón inferior centrado (Absoluto) -->
+            <div class="position-absolute bottom-0 start-50 translate-middle-x pb-4 z-index-2">
+                <a href="#" class="btn-modern">Ver toda la colección</a>
+            </div>
+        </section>
+
+
+        <!-- SECCIÓN WHATSAPP (Ajustada 70% Ancho) -->
+        <section class="whatsapp-section">
+            <div class="container text-center d-flex justify-content-center">
+                <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-card">
+                    <div class="whatsapp-icon-wrapper">
+                        <i class='bx bxl-whatsapp'></i>
+                    </div>
+                    <div class="whatsapp-content">
+                        <h4>Asesoría Personalizada</h4>
+                        <p>¿Tienes dudas sobre alguna prenda o necesitas ayuda con tu pedido? Escríbenos directamente a nuestro WhatsApp y nuestro equipo de soporte te atenderá enseguida.</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
 
         <!-- DIVISOR DE ONDA SUPERIOR -->
         <div class="wave-divider-top">
@@ -536,13 +219,176 @@
         </div>
     </section>
 
+    <!-- SECCIÓN DE PRODUCTO INDIVIDUAL (Añadido desde item.html antes de testimonios) -->
+    <section class="container product-detail-container">
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="#">Colección</a></li>
+                <li class="breadcrumb-item"><a href="#">Camisas</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Blusa Asimétrica Blanca</li>
+            </ol>
+        </nav>
+
+        <div class="row gx-5">
+            <!-- COLUMNA IZQUIERDA: GALERÍA DE IMÁGENES -->
+            <div class="col-lg-7 mb-5 mb-lg-0">
+                <div class="gallery-container">
+                    <!-- Miniaturas Verticales -->
+                    <div class="thumbnails-vertical">
+                        <!-- Miniatura 1 (Activa) -->
+                        <div class="thumbnail-wrapper active" onclick="changeMainImage(this, 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=800&auto=format&fit=crop')">
+                            <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=200&auto=format&fit=crop" alt="Ángulo 1">
+                        </div>
+                        <!-- Miniatura 2 -->
+                        <div class="thumbnail-wrapper" onclick="changeMainImage(this, 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop')">
+                            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=200&auto=format&fit=crop" alt="Ángulo 2">
+                        </div>
+                        <!-- Miniatura 3 -->
+                        <div class="thumbnail-wrapper" onclick="changeMainImage(this, 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=800&auto=format&fit=crop')">
+                            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=200&auto=format&fit=crop" alt="Ángulo 3">
+                        </div>
+                        <!-- Miniatura 4 -->
+                        <div class="thumbnail-wrapper" onclick="changeMainImage(this, 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=800&auto=format&fit=crop')">
+                            <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=200&auto=format&fit=crop" alt="Ángulo 4">
+                        </div>
+                    </div>
+
+                    <!-- Imagen Principal -->
+                    <div class="main-image-container">
+                        <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=800&auto=format&fit=crop" id="mainImage" alt="Blusa Asimétrica">
+                        <div class="zoom-hint">
+                            <i class='bx bx-zoom-in'></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: INFORMACIÓN DEL PRODUCTO -->
+            <div class="col-lg-5 product-info-section">
+
+                <!-- Reseñas -->
+                <div class="reviews-badge">
+                    <div class="stars text-warning">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star-half'></i>
+                    </div>
+                    <span class="review-text">(4.8 / 120 Reseñas)</span>
+                </div>
+
+                <!-- Título -->
+                <h1 class="product-title-lg">Blusa Asimétrica<br>de Lino Premium</h1>
+
+                <!-- Precio -->
+                <div class="product-price-lg">$45.00</div>
+
+                <!-- Descripción Corta -->
+                <p class="product-description">
+                    Redefine tu estilo con esta blusa asimétrica elaborada en lino 100% orgánico. Su diseño vanguardista y caída natural la convierten en la pieza perfecta tanto para eventos casuales como para una noche de elegancia moderna. Transpirable, cómoda y única.
+                </p>
+
+                <!-- Selector de Color -->
+                <div class="selection-block">
+                    <div class="selection-title">Color Seleccionado: <span id="colorName" class="text-muted fw-normal">Blanco Puro</span></div>
+                    <div class="color-swatch-container">
+                        <div class="color-swatch light-color active" data-name="Blanco Puro" style="background-color: #ffffff; border: 1px solid #ddd;" title="Blanco Puro"></div>
+                        <div class="color-swatch" data-name="Negro Noche" style="background-color: #121212" title="Negro Noche"></div>
+                        <div class="color-swatch" data-name="Beige Arena" style="background-color: #f5f5dc; border: 1px solid #e0e0d0;" title="Beige Arena"></div>
+                    </div>
+                </div>
+
+                <!-- Selector de Talla -->
+                <div class="selection-block">
+                    <div class="selection-title d-flex justify-content-between align-items-center">
+                        <span>Talla: <span id="sizeName" class="text-muted fw-normal">M</span></span>
+                        <a href="#" class="text-decoration-underline text-dark" style="font-size: 0.85rem; font-weight: 600;">Guía de tallas</a>
+                    </div>
+                    <div class="size-container">
+                        <div class="size-box">S</div>
+                        <div class="size-box active">M</div>
+                        <div class="size-box">L</div>
+                        <div class="size-box text-muted" style="border-style: dashed; pointer-events: none; opacity: 0.5;">XL</div>
+                    </div>
+                </div>
+
+                <!-- Cantidad y Botón Comprar -->
+                <div class="action-row">
+                    <div class="quantity-selector">
+                        <button class="qty-btn" onclick="updateQty(-1)">-</button>
+                        <input type="text" class="qty-input" id="qtyInput" value="1" readonly>
+                        <button class="qty-btn" onclick="updateQty(1)">+</button>
+                    </div>
+                    <button class="btn-add-to-cart">
+                        <i class='bx bx-cart-add fs-4'></i> Añadir al Carrito
+                    </button>
+                    <button class="btn btn-outline-dark" style="border-radius: 50%; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--light-grey);">
+                        <i class='bx bx-heart fs-4'></i>
+                    </button>
+                </div>
+
+                <!-- Acordeón de Información Adicional -->
+                <div class="accordion mt-5" id="productDetailsAccordion">
+                    <!-- Detalles -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true">
+                                Detalles del Producto
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#productDetailsAccordion">
+                            <div class="accordion-body">
+                                <ul style="padding-left: 20px; margin-bottom: 0;">
+                                    <li><strong>Material:</strong> 100% Lino Orgánico.</li>
+                                    <li><strong>Corte:</strong> Asimétrico, hombro descubierto.</li>
+                                    <li><strong>Cuidados:</strong> Lavar a mano con agua fría. No usar blanqueador.</li>
+                                    <li><strong>Origen:</strong> Diseñado y fabricado localmente.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Envío -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false">
+                                Envíos y Entregas
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#productDetailsAccordion">
+                            <div class="accordion-body">
+                                Ofrecemos envíos estándar (3-5 días hábiles) y envíos exprés (1-2 días hábiles). El envío estándar es gratuito en compras superiores a $100.00.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Devoluciones -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false">
+                                Política de Devoluciones
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#productDetailsAccordion">
+                            <div class="accordion-body">
+                                Si no estás completamente satisfecho, tienes 30 días para devolver tu pedido en su estado original con las etiquetas puestas. El proceso de devolución no tiene costo adicional.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- SECCIÓN DE TESTIMONIOS (Carrusel Infinito) -->
     <section class="testimonials-section">
         <h2 class="section-title mb-2">Lo que dicen nuestros clientes</h2>
         <div class="carousel-container">
             <div class="carousel-track">
 
-                <!-- BLOQUE 1 (Original) -->
+                <!-- BLOQUE 1 -->
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <img src="https://i.pravatar.cc/150?img=47" alt="Cliente">
@@ -587,7 +433,7 @@
                     <p class="testimonial-text">"La mejor experiencia de compra online que he tenido. La interfaz es limpia, el checkout fue rápido y el abrigo que compré es de un material premium. ¡Un 10/10!"</p>
                 </div>
 
-                <!-- BLOQUE 2 (Duplicado exacto para el loop infinito) -->
+                <!-- BLOQUE 2 (Duplicado para loop) -->
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <img src="https://i.pravatar.cc/150?img=47" alt="Cliente">
@@ -598,40 +444,6 @@
                     </div>
                     <p class="testimonial-text">"La calidad de las prendas es increíble. Me encantó el diseño de la nueva colección de boutique y el ajuste es simplemente perfecto. Definitivamente se convirtió en mi tienda favorita."</p>
                 </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="https://i.pravatar.cc/150?img=11" alt="Cliente">
-                        <div class="user-info">
-                            <h4>Carlos Ruiz</h4>
-                            <div class="stars"><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star-half'></i></div>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">"El envío fue rapidísimo y la presentación del empaque es muy elegante. Pedí un par de chaquetas y el estilo minimalista superó mis expectativas. Muy recomendado."</p>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="https://i.pravatar.cc/150?img=32" alt="Cliente">
-                        <div class="user-info">
-                            <h4>Sofía Mendoza</h4>
-                            <div class="stars"><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i></div>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">"Buscaba piezas originales y modernas para renovar mi guardarropa. Las telas son suaves, las tallas corresponden exactamente a la guía y el servicio al cliente es súper atento."</p>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="https://i.pravatar.cc/150?img=68" alt="Cliente">
-                        <div class="user-info">
-                            <h4>Martín Cárdenas</h4>
-                            <div class="stars"><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i></div>
-                        </div>
-                    </div>
-                    <p class="testimonial-text">"La mejor experiencia de compra online que he tenido. La interfaz es limpia, el checkout fue rápido y el abrigo que compré es de un material premium. ¡Un 10/10!"</p>
-                </div>
-
             </div>
         </div>
     </section>
@@ -698,44 +510,50 @@
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Lógica JS -->
+    <!-- Lógica de Interacción para Producto -->
     <script>
-        // Navbar scroll logic
-        const navbar = document.getElementById('mainNavbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Load More Photos Logic
-        const toggleBtn = document.getElementById('togglePhotosBtn');
-        const hiddenPhotos = document.querySelectorAll('.toggle-photo');
-        let isExpanded = false;
-
-        toggleBtn.addEventListener('click', () => {
-            isExpanded = !isExpanded;
-
-            hiddenPhotos.forEach(photo => {
-                if (isExpanded) {
-                    photo.classList.remove('hidden-photo');
-                } else {
-                    photo.classList.add('hidden-photo');
-                }
+        // Cambiar imagen principal
+        function changeMainImage(element, imageUrl) {
+            const mainImage = document.getElementById('mainImage');
+            mainImage.style.opacity = '0.5';
+            setTimeout(() => {
+                mainImage.src = imageUrl;
+                mainImage.style.opacity = '1';
+            }, 150);
+            document.querySelectorAll('.thumbnail-wrapper').forEach(thumb => {
+                thumb.classList.remove('active');
             });
+            element.classList.add('active');
+        }
 
-            if (isExpanded) {
-                toggleBtn.innerHTML = 'Mostrar menos fotos';
-            } else {
-                toggleBtn.innerHTML = 'Cargar más fotos';
-                document.getElementById('photoGallery').scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                });
-            }
+        // Lógica Selector de Tallas
+        document.querySelectorAll('.size-box:not(.text-muted)').forEach(box => {
+            box.addEventListener('click', function() {
+                document.querySelectorAll('.size-box').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById('sizeName').textContent = this.textContent;
+            });
         });
+
+        // Lógica Selector de Colores
+        document.querySelectorAll('.color-swatch').forEach(swatch => {
+            swatch.addEventListener('click', function() {
+                document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById('colorName').textContent = this.getAttribute('data-name');
+            });
+        });
+
+        // Selector de Cantidad
+        function updateQty(change) {
+            const input = document.getElementById('qtyInput');
+            let currentVal = parseInt(input.value);
+            let newVal = currentVal + change;
+            if (newVal >= 1 && newVal <= 10) {
+                input.value = newVal;
+            }
+        }
     </script>
+    <script src="js/main.js"></script>
 </body>
 </html>
