@@ -12,287 +12,42 @@
         <!-- Google Fonts: Nunito -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
 
-        <style>
-            :root {
-                --dark-grey: #121212;
-                --soft-white: #ffffff;
-                --off-white: #f8f9fa;
-                --star-gold: #fbbc04;
-                --accent-color: #333333;
-                --light-grey: #e0e0e0;
-            }
-
-            body {
-                font-family: "Nunito", sans-serif;
-                background-color: var(--soft-white);
-                margin: 0;
-                padding: 0;
-                overflow-x: hidden;
-            }
-
-            /* NAVBAR (Fijo oscuro) */
-            .modern-navbar {
-                background-color: var(--dark-grey);
-                padding: 12px 0;
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            }
-
-            .modern-navbar .navbar-brand,
-            .modern-navbar .nav-link,
-            .modern-navbar .login-link {
-                color: var(--soft-white) !important;
-                font-weight: 600;
-            }
-
-            .navbar-brand {
-                line-height: 1.1;
-                font-size: 1.5rem;
-                text-transform: uppercase;
-                letter-spacing: 1.5px;
-            }
-
-            .modern-navbar .nav-link { margin: 0 12px; font-size: 0.95rem; }
-            .modern-navbar .nav-link:hover { opacity: 0.7; }
-            .login-link { text-decoration: none; font-size: 1.4rem; transition: transform 0.2s ease; }
-            .login-link:hover { transform: translateY(-3px); }
-            .navbar-toggler { border: none; color: var(--soft-white); font-size: 1.8rem; }
-
-            /* BREADCRUMBS & HEADER */
-            .wishlist-header-section { margin-top: 100px; padding: 20px 0 10px; }
-            .breadcrumb { font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; }
-            .breadcrumb a { color: #888; text-decoration: none; transition: color 0.2s; }
-            .breadcrumb a:hover { color: var(--dark-grey); }
-            .breadcrumb-item.active { color: var(--dark-grey); }
-            .breadcrumb-item + .breadcrumb-item::before { content: ">"; color: #ccc; }
-            .page-title { font-size: 2.2rem; font-weight: 800; color: var(--dark-grey); margin-bottom: 10px; letter-spacing: -0.5px; }
-            .page-subtitle { font-size: 1rem; color: #777; font-weight: 600; margin-bottom: 20px; }
-
-            /* BARRA DE BÚSQUEDA Y FILTROS */
-            .toolbar-section { margin-bottom: 30px; }
-            .search-bar { position: relative; }
-            .search-bar i {
-                position: absolute;
-                left: 15px;
-                top: 50%;
-                transform: translateY(-50%);
-                color: #888;
-                font-size: 1.2rem;
-            }
-            .form-control-modern {
-                padding-left: 45px;
-                border-radius: 50px;
-                border: 1px solid var(--light-grey);
-                padding-top: 10px;
-                padding-bottom: 10px;
-                font-size: 0.95rem;
-                box-shadow: none;
-                transition: all 0.3s ease;
-            }
-            .form-control-modern:focus {
-                border-color: var(--dark-grey);
-                box-shadow: 0 0 0 0.2rem rgba(18, 18, 18, 0.1);
-            }
-            .form-select-modern {
-                border-radius: 50px;
-                border: 1px solid var(--light-grey);
-                padding: 10px 35px 10px 20px;
-                font-size: 0.95rem;
-                font-weight: 600;
-                color: var(--dark-grey);
-                cursor: pointer;
-            }
-            .form-select-modern:focus {
-                border-color: var(--dark-grey);
-                box-shadow: 0 0 0 0.2rem rgba(18, 18, 18, 0.1);
-            }
-
-            /* ESTILOS DE TARJETAS WISHLIST */
-            .wishlist-card {
-                border: 1px solid #f0f0f0;
-                border-radius: 20px;
-                background: var(--soft-white);
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                position: relative;
-                overflow: hidden;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-            }
-            .wishlist-card:hover {
-                transform: translateY(-8px);
-                box-shadow: 0 15px 30px rgba(0,0,0,0.06);
-            }
-            .wishlist-img-wrapper {
-                position: relative;
-                height: 320px;
-                overflow: hidden;
-            }
-            .wishlist-img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: transform 0.5s ease;
-            }
-            .wishlist-card:hover .wishlist-img {
-                transform: scale(1.05);
-            }
-
-            /* Botón Eliminar Flotante */
-            .btn-remove-wishlist {
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                background: rgba(255, 255, 255, 0.85);
-                backdrop-filter: blur(5px);
-                border: none;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: var(--dark-grey);
-                font-size: 1.3rem;
-                cursor: pointer;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-                transition: all 0.2s ease;
-                z-index: 10;
-            }
-            .btn-remove-wishlist:hover {
-                background: #dc3545;
-                color: var(--soft-white);
-                transform: scale(1.1);
-            }
-
-            .wishlist-body {
-                padding: 20px;
-                text-align: center;
-                flex-grow: 1;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-            }
-            .wishlist-title {
-                font-size: 1.1rem;
-                font-weight: 800;
-                color: var(--dark-grey);
-                margin-bottom: 5px;
-                text-decoration: none;
-            }
-            .wishlist-title:hover {
-                color: #555;
-            }
-            .wishlist-meta {
-                font-size: 0.85rem;
-                color: #888;
-                font-weight: 600;
-                margin-bottom: 10px;
-            }
-            .wishlist-price {
-                font-size: 1.25rem;
-                font-weight: 800;
-                color: var(--dark-grey);
-                margin-bottom: 20px;
-            }
-
-            /* Botón Añadir al Carrito */
-            .btn-add-cart {
-                width: 100%;
-                background-color: transparent;
-                color: var(--dark-grey);
-                border: 2px solid var(--dark-grey);
-                border-radius: 50px;
-                padding: 12px 15px;
-                font-weight: 800;
-                font-size: 0.95rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-                transition: all 0.3s ease;
-            }
-            .btn-add-cart:hover {
-                background-color: var(--dark-grey);
-                color: var(--soft-white);
-                transform: translateY(-2px);
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            }
-
-            /* PAGINACIÓN MODERNA */
-            .modern-pagination .page-link {
-                border: none;
-                color: #777;
-                font-weight: 600;
-                margin: 0 5px;
-                border-radius: 50%;
-                width: 40px;
-                height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.3s ease;
-            }
-            .modern-pagination .page-link:hover {
-                background-color: #f0f0f0;
-                color: var(--dark-grey);
-            }
-            .modern-pagination .page-item.active .page-link {
-                background-color: var(--dark-grey);
-                color: var(--soft-white);
-                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            }
-            .modern-pagination .page-link-text {
-                border-radius: 50px;
-                width: auto;
-                padding: 0 20px;
-            }
-
-            /* FOOTER MODERNO */
-            .modern-footer { background-color: var(--dark-grey); color: var(--soft-white); padding: 90px 0 30px 0; margin-top: 80px; }
-            .footer-brand { font-size: 2.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; display: inline-block; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; color: var(--soft-white); }
-            .footer-text { color: rgba(255, 255, 255, 0.6); font-size: 1rem; margin-bottom: 30px; max-width: 320px; line-height: 1.6; }
-            .footer-links h5 { font-weight: 800; margin-bottom: 30px; font-size: 1.2rem; letter-spacing: 0.5px; }
-            .footer-links ul { list-style: none; padding: 0; margin: 0; }
-            .footer-links ul li { margin-bottom: 18px; }
-            .footer-links ul li a { color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: all 0.3s ease; display: inline-block; font-size: 0.95rem; }
-            .footer-links ul li a:hover { color: var(--soft-white); transform: translateX(8px); }
-            .social-icons { display: flex; gap: 15px; }
-            .social-icons a { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); color: var(--soft-white); font-size: 1.4rem; text-decoration: none; transition: all 0.3s ease; border: 1px solid rgba(255, 255, 255, 0.05); }
-            .social-icons a:hover { background: var(--soft-white); color: var(--dark-grey); transform: translateY(-5px); border-color: var(--soft-white); }
-            .footer-bottom { margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; color: rgba(255, 255, 255, 0.4); font-size: 0.95rem; }
-        </style>
+        <!-- Estilos propios -->
+        <link href='css/style.css' rel='stylesheet'>
+        <link href='css/pages.css' rel='stylesheet'>
     </head>
     <body>
-        <!-- NAVBAR -->
+        <!-- == NAVBAR == -->
         <nav class="navbar navbar-expand-lg fixed-top modern-navbar" id="mainNavbar">
             <div class="container-fluid px-4 px-md-5">
-                <a class="navbar-brand fw-bold" href="#">logo<br />here</a>
+                <a class="navbar-brand fw-bold" href="index.html">logo<br />here</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
                     <i class="bx bx-menu"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navContent">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Sale</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="products.html">Sale</a></li>
+                        <li class="nav-item"><a class="nav-link" href="services.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     </ul>
                     <div class="d-flex align-items-center gap-4 mt-3 mt-lg-0">
-                        <a href="#" class="login-link"><i class="bx bx-user"></i></a>
+                        <a href="login.html" class="login-link"><i class="bx bx-user"></i></a>
                         <a href="cart.html" class="login-link"><i class="bx bx-cart"></i></a>
                         <a href="wishlist.html" class="login-link" style="color: var(--star-gold) !important;"><i class="bx bxs-heart"></i></a>
                     </div>
                 </div>
             </div>
         </nav>
+        <!-- == /NAVBAR == -->
 
-        <!-- HEADER WISHLIST -->
+        <!-- == WISHLIST == -->
         <section class="container wishlist-header-section">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="#">Mi Cuenta</a></li>
+                    <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="dashboard.html">Mi Cuenta</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Favoritos</li>
                 </ol>
             </nav>
@@ -415,13 +170,14 @@
                 </ul>
             </nav>
         </section>
+        <!-- == /WISHLIST == -->
 
-        <!-- FOOTER MODERNO -->
+        <!-- == FOOTER == -->
         <footer class="modern-footer">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-                        <a href="#" class="footer-brand">logo<br />here</a>
+                        <a href="index.html" class="footer-brand">logo<br />here</a>
                         <p class="footer-text">
                             Redefiniendo el estilo moderno. Descubre piezas
                             exclusivas diseñadas para destacar tu esencia con la
@@ -437,10 +193,10 @@
                     <div class="col-lg-2 col-md-6 footer-links">
                         <h5>Tienda</h5>
                         <ul>
-                            <li><a href="#">Nueva Colección</a></li>
-                            <li><a href="#">Más Vendidos</a></li>
-                            <li><a href="#">Ofertas (Sale)</a></li>
-                            <li><a href="#">Accesorios</a></li>
+                            <li><a href="products.html">Nueva Colección</a></li>
+                            <li><a href="products.html">Más Vendidos</a></li>
+                            <li><a href="products.html">Ofertas (Sale)</a></li>
+                            <li><a href="products.html">Accesorios</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-2 col-md-6 footer-links">
@@ -449,7 +205,7 @@
                             <li><a href="#">Preguntas Frecuentes</a></li>
                             <li><a href="#">Envíos y Devoluciones</a></li>
                             <li><a href="#">Guía de Tallas</a></li>
-                            <li><a href="#">Contacto</a></li>
+                            <li><a href="contact.html">Contacto</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6 footer-links">
@@ -465,8 +221,11 @@
                 </div>
             </div>
         </footer>
+        <!-- == /FOOTER == -->
 
         <!-- Bootstrap 5 JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script src="js/main.js"></script>
     </body>
 </html>

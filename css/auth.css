@@ -1,0 +1,337 @@
+/* =========================================
+            == AUTH - SPLIT LAYOUT ==
+========================================= */
+
+/* Contenedor Principal Dividido */
+.split-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+/* Sección Izquierda - Imagen */
+.image-section {
+    flex: 1;
+    background-size: cover !important;
+    background-position: center center !important;
+    position: relative;
+    display: none;
+}
+
+@media (min-width: 992px) {
+    .image-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 40px;
+    }
+}
+
+.image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(18, 18, 18, 0.1), rgba(18, 18, 18, 0.6));
+}
+
+.brand-logo-white {
+    position: relative;
+    z-index: 2;
+    color: var(--soft-white);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+}
+
+.image-text {
+    position: relative;
+    z-index: 2;
+    color: var(--soft-white);
+}
+
+.image-text h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.image-text p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+
+/* =========================================
+            == AUTH - FORM SECTION ==
+========================================= */
+.form-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--soft-white);
+    padding: 40px 20px;
+    overflow-y: auto;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 420px;
+    margin: auto 0;
+}
+
+.mobile-logo {
+    display: block;
+    color: var(--dark-grey);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+@media (min-width: 992px) {
+    .mobile-logo {
+        display: none;
+    }
+}
+
+.form-header {
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.form-header h1 {
+    font-weight: 800;
+    font-size: 2rem;
+    color: var(--dark-grey);
+    margin-bottom: 8px;
+}
+
+.form-header p {
+    color: var(--text-light-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+            == AUTH - OAUTH BUTTONS ==
+========================================= */
+.oauth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.btn-oauth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--soft-white);
+    border: 1px solid var(--light-grey);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--dark-grey);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-oauth:hover {
+    background-color: var(--off-white);
+    border-color: #d0d0d0;
+    transform: translateY(-2px);
+}
+
+.btn-oauth i {
+    font-size: 1.3rem;
+}
+
+
+/* =========================================
+            == AUTH - DIVIDER ==
+========================================= */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--text-placeholder);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--light-grey);
+}
+
+.divider::before { margin-right: 15px; }
+.divider::after { margin-left: 15px; }
+
+
+/* =========================================
+            == AUTH - FORM ELEMENTS ==
+========================================= */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-label {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--dark-grey);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-control {
+    border: 1px solid var(--light-grey);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--dark-grey);
+    background-color: var(--soft-white);
+    transition: all 0.3s ease;
+    box-shadow: none !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-control::placeholder {
+    color: #bbb;
+    font-weight: 400;
+}
+
+.form-control:focus {
+    border-color: var(--dark-grey);
+    outline: none;
+}
+
+
+/* =========================================
+            == AUTH - EXTRA OPTIONS ==
+========================================= */
+.extra-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.form-check-input {
+    border-color: var(--light-grey);
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: var(--dark-grey);
+    border-color: var(--dark-grey);
+}
+
+.form-check-label {
+    color: var(--text-light-muted);
+    cursor: pointer;
+}
+
+.form-check-label a {
+    color: var(--dark-grey);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.form-check-label a:hover {
+    text-decoration: underline;
+}
+
+.forgot-link {
+    color: var(--dark-grey);
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.forgot-link:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+
+/* =========================================
+            == AUTH - BUTTONS ==
+========================================= */
+.btn-submit {
+    width: 100%;
+    background-color: var(--dark-grey);
+    color: var(--soft-white);
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--shadow-lg);
+}
+
+.btn-submit:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--shadow-xl);
+}
+
+
+/* =========================================
+            == AUTH - FORM FOOTER ==
+========================================= */
+.form-footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-light-muted);
+}
+
+.form-footer a {
+    color: var(--dark-grey);
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: opacity 0.3s ease;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+    opacity: 0.7;
+}
+
+.form-footer a i {
+    font-size: 1.2rem;
+}

@@ -12,333 +12,56 @@
     <!-- Google Fonts: Nunito -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
 
+    <link href='css/style.css' rel='stylesheet'>
+    <link href='css/auth.css' rel='stylesheet'>
+
+    <!-- == HEAD == -->
+
     <style>
-        :root {
-            --dark-grey: #121212;
-            --soft-white: #ffffff;
-            --off-white: #f8f9fa;
-            --accent-color: #333333;
-            --light-grey: #eaeaea;
-        }
-
+        /* Sólo estilos únicos de login que no están en auth.css ni style.css */
         body {
-            font-family: 'Nunito', sans-serif;
-            background-color: var(--soft-white);
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Prevent scrolling on desktop for a clean app feel */
+            overflow: hidden; /* Evita scroll en desktop para un look limpio de app */
         }
 
-        /* Contenedor Principal Dividido */
-        .split-layout {
-            display: flex;
-            min-height: 100vh;
-            width: 100vw;
-        }
-
-        /* Sección Izquierda - Imagen */
         .image-section {
-            flex: 1;
             background: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1200&auto=format&fit=crop') no-repeat center center;
-            background-size: cover;
-            position: relative;
-            display: none; /* Oculto en móviles */
-        }
-
-        @media (min-width: 992px) {
-            .image-section {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                padding: 40px;
-            }
-        }
-
-        .image-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(18, 18, 18, 0.1), rgba(18, 18, 18, 0.6));
-        }
-
-        .brand-logo-white {
-            position: relative;
-            z-index: 2;
-            color: var(--soft-white);
-            font-size: 2rem;
-            font-weight: 800;
-            line-height: 1.1;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            text-decoration: none;
-        }
-
-        .image-text {
-            position: relative;
-            z-index: 2;
-            color: var(--soft-white);
-        }
-
-        .image-text h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-
-        .image-text p {
-            font-size: 1.1rem;
-            font-weight: 600;
-            opacity: 0.9;
-        }
-
-        /* Sección Derecha - Formulario */
-        .form-section {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--soft-white);
-            padding: 40px 20px;
-            overflow-y: auto;
-        }
-
-        .form-container {
-            width: 100%;
-            max-width: 420px;
-        }
-
-        .mobile-logo {
-            display: block;
-            color: var(--dark-grey);
-            font-size: 2rem;
-            font-weight: 800;
-            line-height: 1.1;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            text-decoration: none;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        @media (min-width: 992px) {
-            .mobile-logo {
-                display: none;
-            }
-        }
-
-        .form-header {
-            margin-bottom: 35px;
-            text-align: center;
-        }
-
-        .form-header h1 {
-            font-weight: 800;
-            font-size: 2rem;
-            color: var(--dark-grey);
-            margin-bottom: 8px;
-        }
-
-        .form-header p {
-            color: #666;
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        /* Botones OAuth */
-        .oauth-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        .btn-oauth {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 100%;
-            padding: 12px;
-            background-color: var(--soft-white);
-            border: 1px solid var(--light-grey);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--dark-grey);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .btn-oauth:hover {
-            background-color: var(--off-white);
-            border-color: #d0d0d0;
-            transform: translateY(-2px);
-        }
-
-        .btn-oauth i {
-            font-size: 1.3rem;
-        }
-
-        /* Divisor Lineal */
-        .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 25px;
-            color: #999;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid var(--light-grey);
-        }
-
-        .divider::before { margin-right: 15px; }
-        .divider::after { margin-left: 15px; }
-
-        /* Estilos del Formulario Geométrico Minimalista */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: var(--dark-grey);
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .form-control {
-            border: 1px solid var(--light-grey);
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--dark-grey);
-            background-color: var(--soft-white);
-            transition: all 0.3s ease;
-            box-shadow: none !important;
-        }
-
-        .form-control::placeholder {
-            color: #bbb;
-            font-weight: 400;
-        }
-
-        .form-control:focus {
-            border-color: var(--dark-grey);
-            outline: none;
-        }
-
-        /* Opciones Extra */
-        .extra-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .form-check-input {
-            border-color: var(--light-grey);
-            cursor: pointer;
-        }
-
-        .form-check-input:checked {
-            background-color: var(--dark-grey);
-            border-color: var(--dark-grey);
-        }
-
-        .form-check-label {
-            color: #666;
-            cursor: pointer;
-        }
-
-        .forgot-link {
-            color: var(--dark-grey);
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-
-        .forgot-link:hover {
-            opacity: 0.7;
-            text-decoration: underline;
-        }
-
-        /* Botón Submit */
-        .btn-submit {
-            width: 100%;
-            background-color: var(--dark-grey);
-            color: var(--soft-white);
-            border: none;
-            border-radius: 8px;
-            padding: 14px;
-            font-size: 1rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .btn-submit:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        /* Footer del form */
-        .form-footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #666;
-        }
-
-        .form-footer a {
-            color: var(--dark-grey);
-            font-weight: 800;
-            text-decoration: none;
-            margin-left: 5px;
-        }
-
-        .form-footer a:hover {
-            text-decoration: underline;
         }
     </style>
+
+    <!-- == /HEAD == -->
+
 </head>
 <body>
 
+    <!-- == SPLIT LAYOUT == -->
     <div class="split-layout">
 
-        <!-- MITAD IZQUIERDA: IMAGEN (Desktop) -->
+        <!-- == IMAGE SECTION == -->
         <div class="image-section">
             <div class="image-overlay"></div>
-            <a href="#" class="brand-logo-white">logo<br>here</a>
+            <a href="index.html" class="brand-logo-white">logo<br>here</a>
 
             <div class="image-text">
                 <h2>Descubre tu esencia.</h2>
                 <p>Accede a la nueva colección y beneficios exclusivos para miembros.</p>
             </div>
         </div>
+        <!-- == /IMAGE SECTION == -->
 
-        <!-- MITAD DERECHA: FORMULARIO -->
+        <!-- == FORM SECTION == -->
         <div class="form-section">
+
+            <!-- == FORM CONTAINER == -->
             <div class="form-container">
 
-                <a href="#" class="mobile-logo">logo<br>here</a>
+                <a href="index.html" class="mobile-logo">logo<br>here</a>
 
                 <div class="form-header">
                     <h1>Bienvenido de nuevo</h1>
                     <p>Por favor, ingresa tus datos para continuar.</p>
                 </div>
 
-                <!-- Botones OAuth -->
+                <!-- == OAUTH BUTTONS == -->
                 <div class="oauth-buttons">
                     <button class="btn-oauth">
                         <i class='bx bxl-google' style="color: #DB4437;"></i>
@@ -349,10 +72,11 @@
                         Continuar con Apple
                     </button>
                 </div>
+                <!-- == /OAUTH BUTTONS == -->
 
                 <div class="divider">o inicia sesión con correo</div>
 
-                <!-- Formulario -->
+                <!-- == FORM == -->
                 <form action="#" method="POST">
                     <div class="form-group">
                         <label for="email" class="form-label">Correo Electrónico</label>
@@ -371,22 +95,29 @@
                                 Recordarme
                             </label>
                         </div>
-                        <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+                        <a href="forgot.html" class="forgot-link">¿Olvidaste tu contraseña?</a>
                     </div>
 
                     <button type="submit" class="btn-submit">Iniciar Sesión</button>
                 </form>
+                <!-- == /FORM == -->
 
+                <!-- == FORM FOOTER == -->
                 <div class="form-footer">
-                    ¿No tienes una cuenta? <a href="#">Regístrate aquí</a>
+                    ¿No tienes una cuenta? <a href="register.html">Regístrate aquí</a>
                 </div>
+                <!-- == /FORM FOOTER == -->
 
             </div>
+            <!-- == /FORM CONTAINER == -->
+
         </div>
+        <!-- == /FORM SECTION == -->
 
     </div>
+    <!-- == /SPLIT LAYOUT == -->
 
-    <!-- Bootstrap JS (Opcional si necesitas interactividad de BS) -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

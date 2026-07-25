@@ -1,60 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- == HEAD / META == -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boutique | Diseño Moderno y Carrusel Infinito</title>
 
-    <!-- Bootstrap 5 CSS -->
+    <!-- Stylesheets externos -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-    <!-- Google Fonts: Nunito -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
-
     <link href='css/style.css' rel='stylesheet'>
+    <!-- /HEAD -->
 </head>
 <body>
 
-    <!-- NAVBAR -->
+    <!-- ============================== -->
+    <!-- == NAVBAR == -->
+    <!-- ============================== -->
     <nav class="navbar navbar-expand-lg fixed-top modern-navbar" id="mainNavbar">
         <div class="container-fluid px-4 px-md-5">
-            <a class="navbar-brand fw-bold" href="#">logo<br>here</a>
+            <a class="navbar-brand fw-bold" href="index.html">logo<br>here</a>
+
+            <!-- Toggler (mobile) -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
                 <i class='bx bx-menu'></i>
             </button>
+
+            <!-- Contenido colapsable -->
             <div class="collapse navbar-collapse" id="navContent">
+                <!-- Menú de navegación -->
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sale</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="products.html">Sale</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                 </ul>
+
+                <!-- Iconos de usuario -->
                 <div class="d-flex align-items-center gap-4 mt-3 mt-lg-0">
-                    <a href="#" class="login-link"><i class='bx bx-user'></i></a>
-                    <a href="#" class="login-link"><i class="bx bx-cart"></i></a>
-                    <a href="#" class="login-link"><i class='bx bx-heart'></i></a>
+                    <a href="login.html" class="login-link"><i class='bx bx-user'></i></a>
+                    <a href="cart.html" class="login-link"><i class="bx bx-cart"></i></a>
+                    <a href="wishlist.html" class="login-link"><i class='bx bx-heart'></i></a>
                 </div>
             </div>
+            <!-- /Contenido colapsable -->
         </div>
     </nav>
+    <!-- == /NAVBAR == -->
 
-    <!-- HEADER / HERO -->
+
+    <!-- ============================== -->
+    <!-- == HERO SECTION == -->
+    <!-- ============================== -->
     <header class="hero-section">
+        <!-- Título principal -->
         <div style="z-index: 2;">
             <h1 class="display-1 fw-bold" style="font-size: 8vw; letter-spacing: -2px;">MEGA SALE</h1>
             <p class="fs-4 text-white-50 mt-2">Explora nuestra nueva colección</p>
         </div>
+
+        <!-- Reviews badge -->
         <div class="reviews-badge">
+            <!-- Avatares -->
             <div class="avatars-container">
                 <img src="https://i.pravatar.cc/100?img=32" alt="User" class="avatar-circle">
                 <img src="https://i.pravatar.cc/100?img=12" alt="User" class="avatar-circle">
                 <img src="https://i.pravatar.cc/100?img=5" alt="User" class="avatar-circle">
                 <div class="avatar-circle avatar-count">+499</div>
             </div>
+            <!-- Información de reseñas -->
             <div class="reviews-info">
                 <div class="reviews-stars">
                     <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star-half'></i>
@@ -62,14 +78,19 @@
                 <div class="reviews-text">4.8 rating from <span>502</span> reviews</div>
             </div>
         </div>
+        <!-- /Reviews badge -->
     </header>
+    <!-- == /HERO SECTION == -->
 
-    <!-- GALERÍA DE IMÁGENES CON FILTROS -->
+
+    <!-- ============================== -->
+    <!-- == GALERÍA DE IMÁGENES == -->
+    <!-- ============================== -->
     <section class="gallery-section container-fluid mt-5 p-0">
         <div class="container">
             <h2 class="section-title">New Arrivals</h2>
 
-            <!-- CONTROLES DE BÚSQUEDA Y FILTROS -->
+            <!-- == CONTROLES DE BÚSQUEDA Y FILTROS == -->
             <div class="gallery-controls">
                 <div class="search-wrapper">
                     <i class="bx bx-search"></i>
@@ -82,90 +103,110 @@
                     <option value="oferta">En Oferta</option>
                 </select>
             </div>
+            <!-- /CONTROLES -->
 
+            <!-- == MALLADO DE FOTOS == -->
             <div class="gallery-grid" id="photoGallery">
+                <!-- Item 1 - Chaqueta (large) -->
                 <div class="gallery-item item-large" data-title="Chaqueta negra de cuero" data-category="ropa oferta">
                     <div class="sale-badge">-15%</div>
                     <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" alt="Fashion">
-                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir al carrito</a><a href="#" class="overlay-btn-outline"><i class='bx bx-show'></i> Ver más</a></div>
+                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir al carrito</a><a href="item.html" class="overlay-btn-outline"><i class='bx bx-show'></i> Ver más</a></div>
                 </div>
+
+                <!-- Item 2 - Suéter (wide) -->
                 <div class="gallery-item item-wide" data-title="Suéter tejido casual" data-category="ropa">
                     <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=400&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir al carrito</a></div>
                 </div>
+
+                <!-- Item 3 - Blusa (normal) -->
                 <div class="gallery-item item-normal" data-title="Blusa elegante blanca" data-category="ropa oferta">
                     <div class="sale-badge">-30%</div>
                     <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=400&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a></div>
                 </div>
+
+                <!-- Item 4 - Pantalón (tall) -->
                 <div class="gallery-item item-tall" data-title="Pantalón casual" data-category="ropa">
                     <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop" alt="Fashion">
-                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a><a href="#" class="overlay-btn-outline"><i class='bx bx-show'></i> Ver más</a></div>
+                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a><a href="item.html" class="overlay-btn-outline"><i class='bx bx-show'></i> Ver más</a></div>
                 </div>
+
+                <!-- Item 5 - Bolso (normal) -->
                 <div class="gallery-item item-normal" data-title="Bolso de mano y gorro" data-category="accesorios">
                     <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=400&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a></div>
                 </div>
 
-                <!-- Fotos Ocultas -->
+                <!-- == FOTOS OCULTAS (toggle) == -->
                 <div class="gallery-item item-wide toggle-photo hidden-photo" data-title="Vestido de noche" data-category="ropa">
                     <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir al carrito</a></div>
                 </div>
+
                 <div class="gallery-item item-tall toggle-photo hidden-photo" data-title="Botines de cuero" data-category="accesorios oferta">
                     <div class="sale-badge">-10%</div>
                     <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=400&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a></div>
                 </div>
+
                 <div class="gallery-item item-normal toggle-photo hidden-photo" data-title="Sombrero clásico de sol" data-category="accesorios">
                     <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=400&auto=format&fit=crop" alt="Fashion">
                     <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir</a></div>
                 </div>
+
+                <!-- Item 9 - Abrigo moderno largo -->
                 <div class="gallery-item item-large toggle-photo hidden-photo" data-title="Abrigo moderno largo" data-category="ropa">
                     <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop" alt="Fashion">
-                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir al carrito</a><a href="#" class="overlay-btn-outline"><i class='bx bx-show'></i> Ver más</a></div>
+                    <div class="item-overlay"><a href="#" class="overlay-btn"><i class='bx bx-cart-add'></i> Añadir al carrito</a><a href="item.html" class="overlay-btn-outline"><i class='bx bx-show'></i> Ver más</a></div>
                 </div>
+                <!-- /FOTOS OCULTAS -->
             </div>
+            <!-- /MALLADO DE FOTOS -->
 
-            <!-- Botón Cargar Más -->
+            <!-- Botón cargar más -->
             <div class="text-center">
                 <button class="btn-modern" id="togglePhotosBtn">Cargar más fotos</button>
             </div>
         </div>
 
-        <!-- SECCIÓN MUNDIAL INTRO (50vh) -->
+        <!-- ============================== -->
+        <!-- == MUNDIAL INTRO (70vh) == -->
+        <!-- ============================== -->
         <section class="wundial-intro-section mt-5">
             <div class="container-fluid h-100 position-relative">
                 <div class="row h-100 align-items-center m-0">
-                    <!-- Texto Izquierdo -->
-                    <div class="col-md-3 text-center text-md-end z-index-2">
+                    <div class="col-md-3 text-center text-md</title>-end z-index-2">
                         <h2 class="wundial-side-text">Camisas del<br>Mundial</h2>
                     </div>
-                    <!-- Balón Central -->
                     <div class="col-md-6 d-flex justify-content-center align-items-center z-index-2">
+                        <!-- Espacio para balón central -->
                     </div>
-                    <!-- Texto Derecho -->
                     <div class="col-md-3 text-center text-md-start z-index-2">
                         <h2 class="wundial-side-text">Ya<br>Disponible</h2>
                     </div>
                 </div>
-                <!-- Botón inferior centrado (Absoluto) -->
                 <div class="position-absolute bottom-0 start-50 translate-middle-x pb-4 z-index-2">
                     <a href="#wundial-collection" class="btn-modern">Ver colección</a>
                 </div>
             </div>
         </section>
+        <!-- == /MUNDIAL INTRO == -->
 
-        <!-- SECCIÓN MUNDIAL COLECCIÓN (50vh pegado al anterior) -->
+        <!-- ============================== -->
+        <!-- == MUNDIAL COLECCIÓN (70vh) == -->
+        <!-- ============================== -->
         <section id="wundial-collection" class="wundial-collection-section">
-                <!-- Botón inferior centrado (Absoluto) -->
             <div class="position-absolute bottom-0 start-50 translate-middle-x pb-4 z-index-2">
-                <a href="#" class="btn-modern">Ver toda la colección</a>
+                <a href="products.html" class="btn-modern">Ver toda la colección</a>
             </div>
         </section>
+        <!-- == /MUNDIAL COLECCIÓN == -->
 
-
-        <!-- SECCIÓN WHATSAPP (Ajustada 70% Ancho) -->
+        <!-- ============================== -->
+        <!-- == WHATSAPP SECTION == -->
+        <!-- ============================== -->
         <section class="whatsapp-section">
             <div class="container text-center d-flex justify-content-center">
                 <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-card">
@@ -179,17 +220,21 @@
                 </a>
             </div>
         </section>
+        <!-- == /WHATSAPP SECTION == -->
 
-
-        <!-- DIVISOR DE ONDA SUPERIOR -->
+        <!-- Divisor de onda superior -->
         <div class="wave-divider-top">
             <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
                 <path d="M0,60 C320,120 420,0 740,60 C1060,120 1200,20 1440,60 L1440,120 L0,120 Z" fill="var(--dark-grey)"/>
             </svg>
         </div>
     </section>
+    <!-- == /GALERÍA DE IMÁGENES == -->
 
-    <!-- SECCIÓN DE BENEFICIOS -->
+
+    <!-- ============================== -->
+    <!-- == BENEFITS SECTION == -->
+    <!-- ============================== -->
     <section class="benefits-section">
         <div class="container">
             <div class="row text-center">
@@ -211,71 +256,72 @@
             </div>
         </div>
 
-        <!-- DIVISOR DE ONDA INFERIOR -->
+        <!-- Divisor de onda inferior -->
         <div class="wave-divider-bottom">
             <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
                 <path d="M0,60 C320,120 420,0 740,60 C1060,120 1200,20 1440,60 L1440,120 L0,120 Z" fill="var(--soft-white)"/>
             </svg>
         </div>
     </section>
+    <!-- == /BENEFITS SECTION == -->
 
-    <!-- SECCIÓN DE PRODUCTO INDIVIDUAL (Añadido desde item.html antes de testimonios) -->
+
+    <!-- ============================== -->
+    <!-- == PRODUCT DETAIL SECTION == -->
+    <!-- ============================== -->
     <section class="container product-detail-container">
+
         <!-- Breadcrumbs -->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="#">Colección</a></li>
-                <li class="breadcrumb-item"><a href="#">Camisas</a></li>
+                <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="products.html">Colección</a></li>
+                <li class="breadcrumb-item"><a href="products.html">Camisas</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Blusa Asimétrica Blanca</li>
             </ol>
         </nav>
+        <!-- /Breadcrumbs -->
 
         <div class="row gx-5">
-            <!-- COLUMNA IZQUIERDA: GALERÍA DE IMÁGENES -->
+            <!-- == COLUMNA IZQUIERDA: GALERÍA == -->
             <div class="col-lg-7 mb-5 mb-lg-0">
                 <div class="gallery-container">
-                    <!-- Miniaturas Verticales -->
+                    <!-- Miniaturas verticales -->
                     <div class="thumbnails-vertical">
-                        <!-- Miniatura 1 (Activa) -->
                         <div class="thumbnail-wrapper active" onclick="changeMainImage(this, 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=800&auto=format&fit=crop')">
                             <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=200&auto=format&fit=crop" alt="Ángulo 1">
                         </div>
-                        <!-- Miniatura 2 -->
                         <div class="thumbnail-wrapper" onclick="changeMainImage(this, 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop')">
                             <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=200&auto=format&fit=crop" alt="Ángulo 2">
                         </div>
-                        <!-- Miniatura 3 -->
                         <div class="thumbnail-wrapper" onclick="changeMainImage(this, 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=800&auto=format&fit=crop')">
                             <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=200&auto=format&fit=crop" alt="Ángulo 3">
                         </div>
-                        <!-- Miniatura 4 -->
                         <div class="thumbnail-wrapper" onclick="changeMainImage(this, 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=800&auto=format&fit=crop')">
                             <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=200&auto=format&fit=crop" alt="Ángulo 4">
                         </div>
                     </div>
+                    <!-- /Miniaturas -->
 
-                    <!-- Imagen Principal -->
+                    <!-- Imagen principal -->
                     <div class="main-image-container">
                         <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=800&auto=format&fit=crop" id="mainImage" alt="Blusa Asimétrica">
                         <div class="zoom-hint">
                             <i class='bx bx-zoom-in'></i>
                         </div>
                     </div>
+                    <!-- /Imagen principal -->
                 </div>
             </div>
+            <!-- == /COLUMNA IZQUIERDA == -->
 
-            <!-- COLUMNA DERECHA: INFORMACIÓN DEL PRODUCTO -->
+            <!-- == COLUMNA DERECHA: INFO PRODUCTO == -->
             <div class="col-lg-5 product-info-section">
 
                 <!-- Reseñas -->
                 <div class="reviews-badge">
                     <div class="stars text-warning">
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star-half'></i>
+                        <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star-half'></i>
                     </div>
                     <span class="review-text">(4.8 / 120 Reseñas)</span>
                 </div>
@@ -286,12 +332,12 @@
                 <!-- Precio -->
                 <div class="product-price-lg">$45.00</div>
 
-                <!-- Descripción Corta -->
+                <!-- Descripción -->
                 <p class="product-description">
                     Redefine tu estilo con esta blusa asimétrica elaborada en lino 100% orgánico. Su diseño vanguardista y caída natural la convierten en la pieza perfecta tanto para eventos casuales como para una noche de elegancia moderna. Transpirable, cómoda y única.
                 </p>
 
-                <!-- Selector de Color -->
+                <!-- Selector de color -->
                 <div class="selection-block">
                     <div class="selection-title">Color Seleccionado: <span id="colorName" class="text-muted fw-normal">Blanco Puro</span></div>
                     <div class="color-swatch-container">
@@ -300,8 +346,9 @@
                         <div class="color-swatch" data-name="Beige Arena" style="background-color: #f5f5dc; border: 1px solid #e0e0d0;" title="Beige Arena"></div>
                     </div>
                 </div>
+                <!-- /Color -->
 
-                <!-- Selector de Talla -->
+                <!-- Selector de talla -->
                 <div class="selection-block">
                     <div class="selection-title d-flex justify-content-between align-items-center">
                         <span>Talla: <span id="sizeName" class="text-muted fw-normal">M</span></span>
@@ -314,8 +361,9 @@
                         <div class="size-box text-muted" style="border-style: dashed; pointer-events: none; opacity: 0.5;">XL</div>
                     </div>
                 </div>
+                <!-- /Talla -->
 
-                <!-- Cantidad y Botón Comprar -->
+                <!-- Cantidad y botón comprar -->
                 <div class="action-row">
                     <div class="quantity-selector">
                         <button class="qty-btn" onclick="updateQty(-1)">-</button>
@@ -329,8 +377,9 @@
                         <i class='bx bx-heart fs-4'></i>
                     </button>
                 </div>
+                <!-- /Cantidad y comprar -->
 
-                <!-- Acordeón de Información Adicional -->
+                <!-- Acordeón información adicional -->
                 <div class="accordion mt-5" id="productDetailsAccordion">
                     <!-- Detalles -->
                     <div class="accordion-item">
@@ -350,6 +399,8 @@
                             </div>
                         </div>
                     </div>
+                    <!-- /Detalles -->
+
                     <!-- Envío -->
                     <div class="accordion-item">
                         <h2 class="accordion-header">
@@ -363,6 +414,8 @@
                             </div>
                         </div>
                     </div>
+                    <!-- /Envío -->
+
                     <!-- Devoluciones -->
                     <div class="accordion-item">
                         <h2 class="accordion-header">
@@ -376,19 +429,26 @@
                             </div>
                         </div>
                     </div>
+                    <!-- /Devoluciones -->
                 </div>
+                <!-- /Acordeón -->
 
             </div>
+            <!-- == /COLUMNA DERECHA == -->
         </div>
     </section>
+    <!-- == /PRODUCT DETAIL SECTION == -->
 
-    <!-- SECCIÓN DE TESTIMONIOS (Carrusel Infinito) -->
+
+    <!-- ============================== -->
+    <!-- == TESTIMONIALS CAROUSEL == -->
+    <!-- ============================== -->
     <section class="testimonials-section">
         <h2 class="section-title mb-2">Lo que dicen nuestros clientes</h2>
         <div class="carousel-container">
             <div class="carousel-track">
 
-                <!-- BLOQUE 1 -->
+                <!-- Testimonio 1 -->
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <img src="https://i.pravatar.cc/150?img=47" alt="Cliente">
@@ -400,6 +460,7 @@
                     <p class="testimonial-text">"La calidad de las prendas es increíble. Me encantó el diseño de la nueva colección de boutique y el ajuste es simplemente perfecto. Definitivamente se convirtió en mi tienda favorita."</p>
                 </div>
 
+                <!-- Testimonio 2 -->
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <img src="https://i.pravatar.cc/150?img=11" alt="Cliente">
@@ -411,6 +472,7 @@
                     <p class="testimonial-text">"El envío fue rapidísimo y la presentación del empaque es muy elegante. Pedí un par de chaquetas y el estilo minimalista superó mis expectativas. Muy recomendado."</p>
                 </div>
 
+                <!-- Testimonio 3 -->
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <img src="https://i.pravatar.cc/150?img=32" alt="Cliente">
@@ -422,6 +484,7 @@
                     <p class="testimonial-text">"Buscaba piezas originales y modernas para renovar mi guardarropa. Las telas son suaves, las tallas corresponden exactamente a la guía y el servicio al cliente es súper atento."</p>
                 </div>
 
+                <!-- Testimonio 4 -->
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <img src="https://i.pravatar.cc/150?img=68" alt="Cliente">
@@ -433,7 +496,7 @@
                     <p class="testimonial-text">"La mejor experiencia de compra online que he tenido. La interfaz es limpia, el checkout fue rápido y el abrigo que compré es de un material premium. ¡Un 10/10!"</p>
                 </div>
 
-                <!-- BLOQUE 2 (Duplicado para loop) -->
+                <!-- Testimonio 5 (Duplicado para loop infinito) -->
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <img src="https://i.pravatar.cc/150?img=47" alt="Cliente">
@@ -444,17 +507,24 @@
                     </div>
                     <p class="testimonial-text">"La calidad de las prendas es increíble. Me encantó el diseño de la nueva colección de boutique y el ajuste es simplemente perfecto. Definitivamente se convirtió en mi tienda favorita."</p>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- FOOTER MODERNO -->
+            </div>
+            <!-- /carousel-track -->
+        </div>
+        <!-- /carousel-container -->
+    </section>
+    <!-- == /TESTIMONIALS CAROUSEL == -->
+
+
+    <!-- ============================== -->
+    <!-- == FOOTER == -->
+    <!-- ============================== -->
     <footer class="modern-footer">
         <div class="container">
             <div class="row">
                 <!-- Columna 1: Brand -->
                 <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-                    <a href="#" class="footer-brand">logo<br>here</a>
+                    <a href="index.html" class="footer-brand">logo<br>here</a>
                     <p class="footer-text">Redefiniendo el estilo moderno. Descubre piezas exclusivas diseñadas para destacar tu esencia con la más alta calidad y atención al detalle.</p>
                     <div class="social-icons">
                         <a href="#"><i class='bx bxl-instagram'></i></a>
@@ -463,54 +533,59 @@
                         <a href="#"><i class='bx bxl-pinterest-alt'></i></a>
                     </div>
                 </div>
+                <!-- /Columna 1 -->
 
-                <!-- Columna 2: Links -->
+                <!-- Columna 2: Links Tienda -->
                 <div class="col-lg-2 col-md-6 footer-links">
                     <h5>Tienda</h5>
                     <ul>
-                        <li><a href="#">Nueva Colección</a></li>
-                        <li><a href="#">Más Vendidos</a></li>
-                        <li><a href="#">Ofertas (Sale)</a></li>
-                        <li><a href="#">Accesorios</a></li>
+                        <li><a href="products.html">Nueva Colección</a></li>
+                        <li><a href="products.html">Más Vendidos</a></li>
+                        <li><a href="products.html">Ofertas (Sale)</a></li>
+                        <li><a href="products.html">Accesorios</a></li>
                     </ul>
                 </div>
+                <!-- /Columna 2 -->
 
-                <!-- Columna 3: Links -->
+                <!-- Columna 3: Links Soporte -->
                 <div class="col-lg-2 col-md-6 footer-links">
                     <h5>Soporte</h5>
                     <ul>
                         <li><a href="#">Preguntas Frecuentes</a></li>
                         <li><a href="#">Envíos y Devoluciones</a></li>
                         <li><a href="#">Guía de Tallas</a></li>
-                        <li><a href="#">Contacto</a></li>
+                        <li><a href="contact.html">Contacto</a></li>
                     </ul>
                 </div>
+                <!-- /Columna 3 -->
 
                 <!-- Columna 4: Newsletter -->
                 <div class="col-lg-4 col-md-6 footer-links">
                     <h5>Únete al Club</h5>
                     <p class="footer-text" style="font-size: 0.95rem; margin-bottom: 15px;">Suscríbete y recibe un 10% de descuento en tu primera compra, además de acceso anticipado a nuevas colecciones.</p>
-
-                    <!-- INPUT PULIDO Y ARREGLADO -->
                     <div class="newsletter-form">
                         <input type="email" placeholder="Tu correo electrónico">
                         <button type="button">Unirme</button>
                     </div>
-
                 </div>
+                <!-- /Columna 4 -->
             </div>
 
-            <!-- Footer Bottom -->
+            <!-- Footer bottom -->
             <div class="footer-bottom">
                 <p class="mb-0">&copy; 2026 LogoHere Boutique. Todos los derechos reservados.</p>
             </div>
+            <!-- /Footer bottom -->
         </div>
     </footer>
+    <!-- == /FOOTER == -->
 
-    <!-- Bootstrap 5 JS -->
+
+    <!-- ============================== -->
+    <!-- == SCRIPTS == -->
+    <!-- ============================== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Lógica de Interacción para Producto -->
     <script>
         // Cambiar imagen principal
         function changeMainImage(element, imageUrl) {
@@ -526,7 +601,7 @@
             element.classList.add('active');
         }
 
-        // Lógica Selector de Tallas
+        // Selector de tallas
         document.querySelectorAll('.size-box:not(.text-muted)').forEach(box => {
             box.addEventListener('click', function() {
                 document.querySelectorAll('.size-box').forEach(b => b.classList.remove('active'));
@@ -535,7 +610,7 @@
             });
         });
 
-        // Lógica Selector de Colores
+        // Selector de colores
         document.querySelectorAll('.color-swatch').forEach(swatch => {
             swatch.addEventListener('click', function() {
                 document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
@@ -544,7 +619,7 @@
             });
         });
 
-        // Selector de Cantidad
+        // Selector de cantidad
         function updateQty(change) {
             const input = document.getElementById('qtyInput');
             let currentVal = parseInt(input.value);
@@ -555,5 +630,6 @@
         }
     </script>
     <script src="js/main.js"></script>
+    <!-- == /SCRIPTS == -->
 </body>
 </html>

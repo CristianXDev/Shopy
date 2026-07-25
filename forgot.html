@@ -12,252 +12,56 @@
     <!-- Google Fonts: Nunito -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
 
+    <link href='css/style.css' rel='stylesheet'>
+    <link href='css/auth.css' rel='stylesheet'>
+
+    <!-- == HEAD == -->
+
     <style>
-        :root {
-            --dark-grey: #121212;
-            --soft-white: #ffffff;
-            --off-white: #f8f9fa;
-            --accent-color: #333333;
-            --light-grey: #eaeaea;
-        }
-
-        body {
-            font-family: 'Nunito', sans-serif;
-            background-color: var(--soft-white);
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
-        /* Contenedor Principal Dividido */
-        .split-layout {
-            display: flex;
-            min-height: 100vh;
-            width: 100vw;
-        }
-
-        /* Sección Izquierda - Imagen */
+        /* Sólo estilos únicos de recuperación que no están en auth.css ni style.css */
         .image-section {
-            flex: 1;
             background: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200&auto=format&fit=crop') no-repeat center center;
-            background-size: cover;
-            position: relative;
-            display: none; /* Oculto en móviles */
         }
 
-        @media (min-width: 992px) {
-            .image-section {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                padding: 40px;
-            }
-        }
-
-        .image-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(18, 18, 18, 0.1), rgba(18, 18, 18, 0.7));
-        }
-
-        .brand-logo-white {
-            position: relative;
-            z-index: 2;
-            color: var(--soft-white);
-            font-size: 2rem;
-            font-weight: 800;
-            line-height: 1.1;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            text-decoration: none;
-        }
-
-        .image-text {
-            position: relative;
-            z-index: 2;
-            color: var(--soft-white);
-        }
-
-        .image-text h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-
-        .image-text p {
-            font-size: 1.1rem;
-            font-weight: 600;
-            opacity: 0.9;
-        }
-
-        /* Sección Derecha - Formulario */
-        .form-section {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--soft-white);
-            padding: 40px 20px;
-            overflow-y: auto;
-        }
-
-        .form-container {
-            width: 100%;
-            max-width: 420px;
-            margin: auto 0;
-        }
-
-        .mobile-logo {
-            display: block;
-            color: var(--dark-grey);
-            font-size: 2rem;
-            font-weight: 800;
-            line-height: 1.1;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            text-decoration: none;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        @media (min-width: 992px) {
-            .mobile-logo {
-                display: none;
-            }
-        }
-
-        .form-header {
-            margin-bottom: 35px;
-            text-align: center;
-        }
-
-        .form-header h1 {
-            font-weight: 800;
-            font-size: 2rem;
-            color: var(--dark-grey);
-            margin-bottom: 12px;
-        }
-
-        .form-header p {
-            color: #666;
-            font-size: 0.95rem;
-            font-weight: 600;
-            line-height: 1.5;
-        }
-
-        /* Estilos del Formulario Geométrico Minimalista */
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-label {
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: var(--dark-grey);
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .form-control {
-            border: 1px solid var(--light-grey);
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--dark-grey);
-            background-color: var(--soft-white);
-            transition: all 0.3s ease;
-            box-shadow: none !important;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .form-control::placeholder {
-            color: #bbb;
-            font-weight: 400;
-        }
-
-        .form-control:focus {
-            border-color: var(--dark-grey);
-            outline: none;
-        }
-
-        /* Botón Submit */
         .btn-submit {
-            width: 100%;
-            background-color: var(--dark-grey);
-            color: var(--soft-white);
-            border: none;
-            border-radius: 8px;
-            padding: 14px;
-            font-size: 1rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             margin-bottom: 25px;
-        }
-
-        .btn-submit:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        /* Footer del form - Link de regreso */
-        .form-footer {
-            text-align: center;
-            font-size: 0.95rem;
-            font-weight: 700;
-        }
-
-        .form-footer a {
-            color: var(--dark-grey);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: opacity 0.3s ease;
-        }
-
-        .form-footer a:hover {
-            opacity: 0.7;
-        }
-
-        .form-footer a i {
-            font-size: 1.2rem;
-            position: relative;
-            top: 1px;
         }
     </style>
+
+    <!-- == /HEAD == -->
+
 </head>
 <body>
 
+    <!-- == SPLIT LAYOUT == -->
     <div class="split-layout">
 
-        <!-- MITAD IZQUIERDA: IMAGEN (Desktop) -->
+        <!-- == IMAGE SECTION == -->
         <div class="image-section">
             <div class="image-overlay"></div>
-            <a href="#" class="brand-logo-white">logo<br>here</a>
+            <a href="index.html" class="brand-logo-white">logo<br>here</a>
 
             <div class="image-text">
                 <h2>Recupera tu acceso.</h2>
                 <p>Te ayudaremos a restablecer tu contraseña para que sigas explorando.</p>
             </div>
         </div>
+        <!-- == /IMAGE SECTION == -->
 
-        <!-- MITAD DERECHA: FORMULARIO -->
+        <!-- == FORM SECTION == -->
         <div class="form-section">
+
+            <!-- == FORM CONTAINER == -->
             <div class="form-container">
 
-                <a href="#" class="mobile-logo">logo<br>here</a>
+                <a href="index.html" class="mobile-logo">logo<br>here</a>
 
                 <div class="form-header">
                     <h1>¿Olvidaste tu contraseña?</h1>
                     <p>Ingresa el correo electrónico asociado a tu cuenta y te enviaremos un enlace seguro para restablecerla.</p>
                 </div>
 
-                <!-- Formulario -->
+                <!-- == FORM == -->
                 <form action="#" method="POST">
                     <div class="form-group">
                         <label for="email" class="form-label">Correo Electrónico</label>
@@ -266,19 +70,25 @@
 
                     <button type="submit" class="btn-submit">Enviar enlace de recuperación</button>
                 </form>
+                <!-- == /FORM == -->
 
-                <!-- Link para volver al Login con ícono -->
+                <!-- == FORM FOOTER == -->
                 <div class="form-footer">
                     <a href="login.html">
                         <i class='bx bx-left-arrow-alt'></i>
                         Volver a iniciar sesión
                     </a>
                 </div>
+                <!-- == /FORM FOOTER == -->
 
             </div>
+            <!-- == /FORM CONTAINER == -->
+
         </div>
+        <!-- == /FORM SECTION == -->
 
     </div>
+    <!-- == /SPLIT LAYOUT == -->
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
