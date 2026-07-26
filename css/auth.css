@@ -77,6 +77,13 @@
     overflow-y: auto;
 }
 
+@media (max-width: 991px) {
+    .form-section {
+        align-items: flex-start;
+        padding: 80px 20px 40px;
+    }
+}
+
 .form-container {
     width: 100%;
     max-width: 420px;

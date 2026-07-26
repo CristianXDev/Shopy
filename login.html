@@ -19,8 +19,10 @@
 
     <style>
         /* Sólo estilos únicos de login que no están en auth.css ni style.css */
-        body {
-            overflow: hidden; /* Evita scroll en desktop para un look limpio de app */
+        @media (min-width: 992px) {
+            body {
+                overflow: hidden; /* Evita scroll en desktop para un look limpio de app */
+            }
         }
 
         .image-section {
