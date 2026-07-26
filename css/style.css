@@ -703,6 +703,10 @@ body {
 
 .footer-bottom { margin-top: 80px; padding-top: 30px; border-top: 1px solid var(--white-alpha-05); text-align: center; color: var(--white-alpha-6); font-size: 0.95rem; }
 
+.footer-links .d-flex {
+    align-items: center;
+}
+
 
 /* =========================================
             == RESPONSIVE ==
@@ -2042,5 +2046,14 @@ text-align: center;
 
 .wishlist-header-section .page-subtitle {
 text-align: center;
+}
+
+}
+
+@media (max-width: 576px) {
+/* Products grid mobile padding */
+.shop-container main .row.g-4 {
+padding-left: 10px;
+padding-right: 10px;
 }
 }
